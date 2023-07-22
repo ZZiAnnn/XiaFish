@@ -20,6 +20,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result handleException(Exception ex) {
+
+        ex.printStackTrace();
         //获取最底层的异常
         Throwable cause = ex.getCause();
         while(cause.getCause()!=null)
@@ -57,6 +59,7 @@ public class GlobalExceptionHandler {
         String message;
         message=cause.getMessage();
         log.info("异常：{}", message);
+
         if(message.contains("UNIQUE"))
         {
             return Result.error("插入的信息已存在");

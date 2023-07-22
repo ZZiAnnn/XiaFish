@@ -12,6 +12,6 @@
     </insert>
     <select id="searchGoods" resultType="com.xiafish.pojo.Goods">
         select *
-        from goods
+        from xiafish.goods
     </select>
 </mapper>

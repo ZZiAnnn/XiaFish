@@ -29,7 +29,6 @@ public class ShoppingCartController {
             return Result.error("该商品已加入购物车");
         }
     }
-
     @GetMapping("/shoppingcart")
     public Result getCart(@RequestParam("userId") Integer userId,
                           @RequestParam(value = "page",defaultValue = "1") Integer page,

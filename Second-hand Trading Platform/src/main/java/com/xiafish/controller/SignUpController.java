@@ -2,6 +2,7 @@ package com.xiafish.controller;
 
 import com.xiafish.pojo.Result;
 import com.xiafish.service.SignUpService;
+import com.xiafish.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -26,10 +28,14 @@ public class SignUpController {
         // 使用BCryptPasswordEncoder进行密码加密
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encryptedPassword = encoder.encode(password);
-
+        
         signUpService.addUser(username,encryptedPassword);
-        return Result.success();
+        Map<String, Object> claims = new HashMap<>();
 
-
+        Integer userId=signUpService.getId();
+        claims.put("id", userId);
+        claims.put("status",1);
+        String jwt = JwtUtils.generateJwt(claims);
+        return Result.success(jwt);
     }
 }
