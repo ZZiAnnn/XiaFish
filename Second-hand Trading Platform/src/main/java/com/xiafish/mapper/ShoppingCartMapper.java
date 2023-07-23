@@ -17,7 +17,8 @@ public interface ShoppingCartMapper {
             "where user_id = #{userId} ")
     List<ShoppingCart> getShoppingCartsList(Integer userId);
 
-    @Update("update xiafish.shopping_cart set collect_num=#{collectNum} where shopping_cart_id=#{shoppingCartId} and user_id = #{userId}")
+    @Update("update xiafish.shopping_cart set collect_num=#{collectNum} " +
+            "where shopping_cart_id=#{shoppingCartId} and user_id = #{userId}")
     void updateShoppingCart(ShoppingCart shoppingCart);
     @Select("select xiafish.shopping_cart.* " +
             "from xiafish.shopping_cart " +

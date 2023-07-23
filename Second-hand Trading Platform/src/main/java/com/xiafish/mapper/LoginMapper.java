@@ -13,4 +13,11 @@ public interface LoginMapper {
 
     @Select("select user_status from xiafish.user where user_id=#{usrId}")
     Integer getStatusByUserId(Integer userId);
+
+    @Select("select * from xiafish.user where user_email=#{email}")
+    Integer findByEmail(String email);
+
+    @Select("select user_id from xiafish.user " +
+            "where user_email=#{email} or user_phone_num=#{phone}")
+    Integer findByEmailOrPhone(String email, String phone);
 }

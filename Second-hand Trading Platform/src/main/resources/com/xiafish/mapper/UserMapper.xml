@@ -17,29 +17,35 @@
         </set>
         WHERE user_id = #{userId}
     </update>
+
+
     <insert id="addGoods" parameterType="com.xiafish.pojo.Goods">
         INSERT INTO xiafish.goods
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="goodsName != null">goods_name,</if>
             <if test="oriPrice != null">ori_price,</if>
             <if test="curPrice != null">cur_price,</if>
-            <if test="goodsCategoryId != null">goods_category_id,</if>
+            <if test="goodsCategoryName != null">goods_category_name,</if>
             <if test="sellerId != null">seller_id,</if>
             <if test="releaseTime != null">release_time,</if>
             <if test="inventory != null">inventory,</if>
             <if test="goodsProfile != null">goods_profile,</if>
+            <if test="goodsPhotos!=null"> goods_photos</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="goodsName != null">#{goodsName},</if>
             <if test="oriPrice != null">#{oriPrice},</if>
             <if test="curPrice != null">#{curPrice},</if>
-            <if test="goodsCategoryId != null">#{goodsCategoryId},</if>
+            <if test="goodsCategoryName != null">#{goodsCategoryName},</if>
             <if test="sellerId != null">#{sellerId},</if>
             <if test="releaseTime != null">#{releaseTime},</if>
             <if test="inventory != null">#{inventory},</if>
             <if test="goodsProfile != null">#{goodsProfile},</if>
+            <if test="goodsPhotos!=null"> #{goodsPhotos}</if>
         </trim>
+
+
     </insert>
     <delete id="deleteGoods">
             delete from xiafish.goods where seller_id = #{userId}
@@ -57,11 +63,12 @@
             <if test="goodsName != null">goods_name=#{goodsName},</if>
             <if test="oriPrice != null">ori_price=#{oriPrice},</if>
             <if test="curPrice != null">cur_price=#{curPrice},</if>
-            <if test="goodsCategoryId != null">goods_category_id=#{goodsCategoryId},</if>
+            <if test="goodsCategoryName != null">goods_category_Name=#{goodsCategoryName},</if>
             <if test="sellerId != null">seller_id=#{sellerId},</if>
             <if test="releaseTime != null">release_time=#{releaseTime},</if>
             <if test="inventory != null">inventory=#{inventory},</if>
             <if test="goodsProfile != null">goods_profile=#{goodsProfile},</if>
+            <if test="goodsPhotos!=null"> goods_photos=#{goodsPhotos}</if>
         </set>
         WHERE goods_id=#{goodsId}
     </update>

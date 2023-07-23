@@ -1,5 +1,7 @@
 package com.xiafish.pojo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,6 @@ public class Goods {
     private LocalDateTime releaseTime;
     private Integer inventory;
     private String  goodsProfile;
-    private List<String> goodsPhoto;
+    private String goodsPhotos;
     private String goodsCampus;
 }

@@ -13,16 +13,15 @@ public interface UserMapper {
 
     void updateUser(User user);
 
-
-    @Select("select * from xiafish.goods,xiafish.goods_category " +
-            "where goods_category.category_id=goods.goods_category_id and seller_id=#{userId}")
+    @Select("select * from xiafish.goods " +
+            "where seller_id=#{userId}")
     List<Goods> goodsList(Integer userId);
 
     void addGoods(Goods goods);
     void deleteGoods(Integer userId,List<Integer> goodsids);
 
     @Select("select * from xiafish.user_comment where seller_id = #{userid}")
-    List<UserComment> selectcomment(Integer userid);
+    List<UserComment> selectComment(Integer userid);
     @Select("select * from xiafish.shopping_cart where user_id=#{userid}")
     List<ShoppingCart> selectShoppingCart(Integer userid);
     @Select("select * from xiafish.`order` where buyer_id = #{userid}")

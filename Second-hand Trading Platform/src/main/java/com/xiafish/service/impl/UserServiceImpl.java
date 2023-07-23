@@ -1,5 +1,7 @@
 package com.xiafish.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.xiafish.mapper.GoodsMapper;
 import com.xiafish.mapper.UserMapper;
 import com.xiafish.pojo.*;
 import com.xiafish.service.UserService;
@@ -13,6 +15,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private GoodsMapper goodsMapper;
     @Override
     public User getUserById(Integer userId) {
         return userMapper.getUserById(userId);
@@ -20,23 +25,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) throws RuntimeException{
-//        String email = user.getUserEmail();
-//        String phoneNumber = user.getUserPhoneNum();
-//
-//        // 验证邮箱和电话号码的格式
-//        if (email!=null && !ValidationUtils.isValidEmail(email)) {
-//            throw new IllegalArgumentException("Invalid email format");
-//        }
-//
-//        if (phoneNumber!=null && !ValidationUtils.isValidPhoneNumber(phoneNumber)) {
-//            throw new IllegalArgumentException("Invalid phone number format");
-//        }
-            userMapper.updateUser(user);
+        String email = user.getUserEmail();
+        String phoneNumber = user.getUserPhoneNum();
+
+        // 验证邮箱和电话号码的格式
+        if (email!=null && !ValidationUtils.isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+
+        if (phoneNumber!=null && !ValidationUtils.isValidPhoneNumber(phoneNumber)) {
+            throw new IllegalArgumentException("Invalid phone number format");
+        }
+        userMapper.updateUser(user);
     }
-
-
-
-
 
     @Override
     public List<Goods> getGoodsByUserId(Integer userId) {
@@ -44,31 +45,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void releaseGoods(Goods goods) {
+    public void releaseGoods(Goods goods,Integer userId) {
+        goods.setSellerId(userId);
         userMapper.addGoods(goods);
     }
 
     @Override
-    public void deleteGoods(Integer userId,List<Integer> goodsids) {
-        userMapper.deleteGoods(userId,goodsids);
+    public void deleteGoods(Integer userId,List<Integer> goodsIds) {
+        userMapper.deleteGoods(userId,goodsIds);
     }
 
     @Override
     public List<UserComment> findComment(Integer userid) {
-        List<UserComment>userCommentList=userMapper.selectcomment(userid);
-        return userCommentList;
+        return userMapper.selectComment(userid);
     }
 
     @Override
     public List<ShoppingCart> viewShoppingCart(Integer userid) {
-        List<ShoppingCart> shoppingCartsList=userMapper.selectShoppingCart(userid);
-        return shoppingCartsList;
+        return userMapper.selectShoppingCart(userid);
     }
 
     @Override
     public List<Order> findOrder(Integer userid) {
-        List<Order>userOrdersList=userMapper.selectOrder(userid);
-        return userOrdersList;
+        return userMapper.selectOrder(userid);
     }
 
     @Override

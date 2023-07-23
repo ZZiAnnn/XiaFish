@@ -7,4 +7,7 @@ public interface LoginService {
 
     Integer getStatusByUserId(Integer userId);
 
+    Integer valid(String email, String phone);
+
+    boolean checkEmail(String email);
 }

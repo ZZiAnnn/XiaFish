@@ -48,12 +48,13 @@ public class UserController {
             return Result.success(goodsList);
     }
     @PutMapping("user/release")
-    public Result releaseGoods(@RequestBody Goods goods)
+    public Result releaseGoods(@RequestAttribute("userId")  Integer userId,
+                               @RequestBody Goods goods)
     {
             //设置商品发布时间
             goods.setReleaseTime(LocalDateTime.now());
             log.info("发布商品：{}", goods);
-            userService.releaseGoods(goods);
+            userService.releaseGoods(goods,userId);
             return Result.success();
     }
     @DeleteMapping("user/goods/{goodsIds}")

@@ -25,7 +25,6 @@ public class GoodsController {
         return Result.success(goodsList);
     }
 
-    //功能待扩展
     @GetMapping("/goods")
     public Result getGoodsById(@RequestParam("goodsId") Integer Id){
         log.info("根据商品id查找商品{}",Id);

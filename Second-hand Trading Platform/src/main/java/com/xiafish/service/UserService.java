@@ -11,7 +11,7 @@ public interface UserService {
 
     List<Goods> getGoodsByUserId(Integer userId);
 
-    void releaseGoods(Goods goods);
+    void releaseGoods(Goods goods,Integer userId);
 
     void deleteGoods(Integer userId,List<Integer> goodsids);
 

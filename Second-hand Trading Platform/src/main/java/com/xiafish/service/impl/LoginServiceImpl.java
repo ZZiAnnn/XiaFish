@@ -24,4 +24,14 @@ public class LoginServiceImpl implements LoginService {
     {
         return loginMapper.getStatusByUserId(userId);
     }
+
+    @Override
+    public Integer valid(String email, String phone) {
+        return loginMapper.findByEmailOrPhone(email,phone);
+    }
+
+    @Override
+    public boolean checkEmail(String email) {
+        return !(loginMapper.findByEmail(email)==0);
+    }
 }
