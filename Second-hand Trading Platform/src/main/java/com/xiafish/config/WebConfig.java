@@ -27,11 +27,11 @@ public class WebConfig implements WebMvcConfigurer {
     private LoginCheckInterceptor loginCheckInterceptor;
     @Autowired
     private AdminCheckInterceptor adminCheckInterceptor;
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").order(1);
-//        registry.addInterceptor(adminCheckInterceptor).addPathPatterns("/admin/**").order(2);
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").order(1);
+        registry.addInterceptor(adminCheckInterceptor).addPathPatterns("/admin/**").order(2);
+    }
 
 
     @Bean
