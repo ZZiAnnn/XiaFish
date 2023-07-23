@@ -37,9 +37,9 @@ public class AdminController {
     public Result addUser(@RequestBody User user)
     {
         log.info("管理员新建用户：{}",user.toString());
-        if(!(user.getUserEmail().isEmpty())&&!(ValidationUtils.isValidEmail(user.getUserEmail())))
+        if((user.getUserEmail()!=null)&&!(ValidationUtils.isValidEmail(user.getUserEmail())))
             return Result.error("Invalid email format");
-        if(!(user.getUserPhoneNum().isEmpty())&&!(ValidationUtils.isValidPhoneNumber(user.getUserPhoneNum())))
+        if((user.getUserPhoneNum()!=null)&&!(ValidationUtils.isValidPhoneNumber(user.getUserPhoneNum())))
             return Result.error("Invalid phone number format");
         adminService.addUser(user);
         return Result.success();
@@ -55,9 +55,9 @@ public class AdminController {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setUserPasswd(encoder.encode(user.getUserPasswd()));
         }
-        if(!(user.getUserEmail().isEmpty())&&!(ValidationUtils.isValidEmail(user.getUserEmail())))
+        if((user.getUserEmail()!=null)&&!(ValidationUtils.isValidEmail(user.getUserEmail())))
             return Result.error("Invalid email format");
-        if(!(user.getUserPhoneNum().isEmpty())&&!(ValidationUtils.isValidPhoneNumber(user.getUserPhoneNum())))
+        if((user.getUserPhoneNum()!=null)&&!(ValidationUtils.isValidPhoneNumber(user.getUserPhoneNum())))
             return Result.error("Invalid phone number format");
         adminService.updateUser(user);
         return Result.success();
