@@ -5,6 +5,7 @@ import com.xiafish.pojo.GoodsComment;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,4 +39,6 @@ public interface GoodsMapper {
     List<Goods> searchGoods(String goodsName, String goodsCategoryName, LocalDateTime begin,
                             LocalDateTime end, Integer lowPrice,Integer highPrice,String campus);
 
+    @Update("update xiafish.goods set goods.inventory = goods.inventory-#{orderNum} where goods.goods_id =#{goodsId}")
+    void reduceInventory(Integer goodsId, Integer orderNum);
 }

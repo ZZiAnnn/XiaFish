@@ -78,4 +78,9 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.insertImages(goodsId,urls);
 
     }
+
+    @Override
+    public void reduceInventory(Integer goodsId, Integer orderNum) {
+        goodsMapper.reduceInventory(goodsId,orderNum);
+    }
 }

@@ -7,6 +7,7 @@ import com.xiafish.pojo.Result;
 import com.xiafish.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -19,7 +20,7 @@ public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
-    @GetMapping("/goods/all")
+    @PostMapping("/goods/all")
     public Result getGoods(@RequestBody Map<String,Object> goodsRequestBody) {
         PageBean goodsList=goodsService.getGoods(goodsRequestBody);
         return Result.success(goodsList);
@@ -33,10 +34,12 @@ public class GoodsController {
     }
 
     @PostMapping("/goods/purchase")
+    @Transactional(rollbackFor=Exception.class)//事务管理（操作失败时回滚）
     public Result purchaseById(@RequestAttribute("userId")  Integer userId,
                                @RequestParam("goodsId") Integer goodsId,
                                @RequestParam(value = "orderNum", defaultValue = "1") Integer orderNum){
         log.info("用户 {} 直接购买商品 {}，数量为 {}",userId,goodsId,orderNum);
+        goodsService.reduceInventory(goodsId,orderNum);
         goodsService.purchaseById(userId,goodsId,orderNum);
         return  Result.success();
     }
