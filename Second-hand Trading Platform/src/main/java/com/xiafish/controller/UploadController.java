@@ -25,7 +25,7 @@ public class UploadController {
     @Autowired
     private GoodsService goodsService;
 
-    @PostMapping("/upload")
+    @PostMapping("/upload/headImg")
     public Result uploadHeadImg(@RequestAttribute("userId")Integer userId, MultipartFile image) throws IOException {
         log.info("文件上传:{}",image);
         String url= aliOSSUtils.upload(image);
@@ -33,7 +33,6 @@ public class UploadController {
         userService.updateHeadImg(userId,url);
         return Result.success(url);
     }
-
 
     @PostMapping("/upload/goodsImgs")
     public Result uploadPhotos(@RequestParam("photos") MultipartFile[] photos,

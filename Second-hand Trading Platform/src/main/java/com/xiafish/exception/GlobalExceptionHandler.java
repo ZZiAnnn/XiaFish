@@ -58,6 +58,7 @@ public class GlobalExceptionHandler {
         String message;
         message=cause.getMessage();
         log.info("异常：{}", message);
+
         if(message.contains("UNIQUE"))
         {
             return Result.error("插入的信息已存在");

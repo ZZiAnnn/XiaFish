@@ -14,4 +14,9 @@ public class SignUpServiceImpl implements SignUpService {
             signUpMapper.addUser(username, password);
     }
 
+    @Override
+    public Integer getId() {
+        return signUpMapper.selectId();
+    }
+
 }

@@ -29,7 +29,6 @@ public class ShoppingCartController {
             return Result.error("该商品已加入购物车");
         }
     }
-
     @GetMapping("/shoppingcart")
     public Result getCart(@RequestAttribute("userId") Integer userId){
         log.info("分页查询用户{}的购物车信息",userId);
