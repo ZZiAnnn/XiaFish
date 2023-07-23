@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +20,11 @@ public class ShoppingCart {
     private Integer inventory;
     private Integer collectNum;
     private LocalDateTime collectTime;
+    private Float oriPrice;
+    private String goodsCategoryName;
+    private Integer sellerId;
+    private LocalDateTime releaseTime;
+
+    private String  goodsProfile;
+    private List<String> goodsPhoto;
 }

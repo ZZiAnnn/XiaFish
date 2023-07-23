@@ -11,8 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface GoodsMapper {
-
-    List<Goods> searchGoods(String name,Integer goodsCategoryId);
+    
 
     @Select("select * from xiafish.goods where goods_id=#{id}")
     Goods getById(Integer id);
@@ -35,4 +34,6 @@ public interface GoodsMapper {
 
     void insertImages(Integer goodsId, List<String> urls);
 
+    List<Goods> searchGoods(String goodsName, String goodsCategoryName, LocalDateTime begin,
+                            LocalDateTime end, Integer lowPrice,Integer highPrice,String campus);
 }

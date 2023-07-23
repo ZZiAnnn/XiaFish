@@ -17,13 +17,13 @@ public interface ShoppingCartMapper {
             "where user_id = #{userId} ")
     List<ShoppingCart> getShoppingCartsList(Integer userId);
 
-    @Update("update xiafish.shopping_cart set collect_num=#{collectNum} where shopping_cart_id=#{shoppingCartId}")
+    @Update("update xiafish.shopping_cart set collect_num=#{collectNum} where shopping_cart_id=#{shoppingCartId} and user_id = #{userId}")
     void updateShoppingCart(ShoppingCart shoppingCart);
     @Select("select xiafish.shopping_cart.* " +
             "from xiafish.shopping_cart " +
             "where shopping_cart_id = #{shoppingCartId} ")
     ShoppingCart getShoppingCartById(Integer shoppingCartId);
 
-    @Delete("delete from xiafish.shopping_cart where shopping_cart_id=#{shoppingCartId}")
+    @Delete("delete from xiafish.shopping_cart where shopping_cart_id=#{shoppingCartId} and user_id =#{userId}")
     void deleteShoppingCart(ShoppingCart shoppingCart);
 }

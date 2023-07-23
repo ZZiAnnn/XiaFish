@@ -11,7 +11,19 @@
             </foreach>
     </insert>
     <select id="searchGoods" resultType="com.xiafish.pojo.Goods">
-        select *
-        from goods
+        select goods.*,user.user_campus as goodsCampus
+        from xiafish.goods
+        LEFT JOIN xiafish.user
+        ON goods.seller_id = user.user_id
+        <where>
+            <if test="goodsName != null">goods_name like concat('%',#{goodsName},'%') </if>
+            <if test="goodsCategoryName != null">and goods_category_name = #{goodsCategoryName}</if>
+            <if test="begin != null">and release_time &gt;= #{begin}</if>
+            <if test="end != null">and release_time &lt;= #{end}</if>
+            <if test="lowPrice != null">and cur_price >= #{lowPrice}</if>
+            <if test="highPrice != null">and cur_price &lt;= #{highPrice}</if>
+            <if test="campus != null">and user.user_campus like #{campus}</if>
+        </where>
+        order by release_time
     </select>
 </mapper>
