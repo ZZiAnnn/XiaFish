@@ -2,11 +2,14 @@ package com.xiafish.service;
 
 import com.xiafish.pojo.Goods;
 import com.xiafish.pojo.GoodsComment;
+import com.xiafish.pojo.PageBean;
+import org.springframework.security.core.parameters.P;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsService {
-    List<Goods> getGoods(String goodsName, Integer goodsCategoryId);
+    PageBean getGoods(Map<String,Object> goodsRequestBody);
 
     Goods getGoodsById(Integer id);
 

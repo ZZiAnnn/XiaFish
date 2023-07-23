@@ -18,7 +18,7 @@ public class ShoppingCartController {
     private ShoppingCartService shoppingCartService;
 
     @PutMapping("goods/cart")
-    public Result addToCart(@RequestParam("userId") Integer userId,
+    public Result addToCart(@RequestAttribute("userId")  Integer userId,
                             @RequestParam("goodsId") Integer goodsId,
                             @RequestParam(value = "collectNum", defaultValue = "1") Integer collectNum){
         log.info("用户 {} 将商品 {}加入购物车，数量为 {}", userId, goodsId, collectNum);
@@ -30,33 +30,43 @@ public class ShoppingCartController {
         }
     }
     @GetMapping("/shoppingcart")
-    public Result getCart(@RequestParam("userId") Integer userId,
-                          @RequestParam(value = "page",defaultValue = "1") Integer page,
-                          @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
-        log.info("分页查询用户{}的购物车信息，当前为第{}页，每页有{}条数据",userId,page,pageSize);
+    public Result getCart(@RequestAttribute("userId") Integer userId){
+        log.info("分页查询用户{}的购物车信息，当前为第{}页，每页有{}条数据",userId);
 
-        PageBean list=shoppingCartService.getCart(userId,page,pageSize);
+        List<ShoppingCart> list=shoppingCartService.getCart(userId);
         return Result.success(list);
     }
     @PatchMapping("shoppingcart/update")
-    public Result updateShoppingCart(@RequestBody ShoppingCart shoppingCart)
+    public Result updateShoppingCart(@RequestAttribute("userId") Integer userId,@RequestBody ShoppingCart shoppingCart)
     {
+        shoppingCart.setUserId(userId);
         log.info("购物车修改数量：{}",shoppingCart.toString());
         shoppingCartService.updateShoppingCart(shoppingCart);
         return Result.success();
     }
     @PostMapping("shoppingcart/buy")
-    public Result buyFromShoppingCart(@RequestBody ShoppingCart shoppingCart)
+    public Result buyFromShoppingCart(@RequestAttribute("userId") Integer userId,@RequestParam List<Integer> shoppingCartIds)
     {
-        log.info("购物车下单：{}",shoppingCart.toString());
-        shoppingCartService.buyFromShoppingCart(shoppingCart);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUserId(userId);
+        for (Integer shoppingCartId : shoppingCartIds) {
+            shoppingCart.setShoppingCartId(shoppingCartId);
+            log.info("购物车下单：{}",shoppingCart.toString());
+            shoppingCartService.buyFromShoppingCart(shoppingCart);
+    }
         return Result.success();
+
     }
     @DeleteMapping("shoppingcart/delete")
-    public Result deleteShoppingCart(@RequestBody ShoppingCart shoppingCart)
-    {
-        log.info("购物车删除：{}",shoppingCart.toString());
-        shoppingCartService.deleteShoppingCart(shoppingCart);
+    public Result deleteShoppingCart(@RequestAttribute("userId") Integer userId,@RequestBody List<Integer> shoppingCartIds) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUserId(userId);
+        for (Integer shoppingCartId : shoppingCartIds) {
+            log.info("购物车删除：{}", shoppingCart.toString());
+            shoppingCartService.deleteShoppingCart(shoppingCart);
+
+        }
         return Result.success();
     }
 }
+

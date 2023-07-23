@@ -16,11 +16,11 @@ public class Goods {
     private String goodsName;
     private Float oriPrice;
     private Float curPrice;
-    private Integer goodsCategoryId;
+    private String goodsCategoryName;
     private Integer sellerId;
     private LocalDateTime releaseTime;
     private Integer inventory;
     private String  goodsProfile;
-    private Integer categoryId;
-    private String categoryName;
+    private List<String> goodsPhoto;
+    private String goodsCampus;
 }

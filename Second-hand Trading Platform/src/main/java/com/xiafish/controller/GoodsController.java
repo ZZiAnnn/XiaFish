@@ -2,13 +2,17 @@ package com.xiafish.controller;
 
 import com.xiafish.pojo.Goods;
 import com.xiafish.pojo.GoodsComment;
+import com.xiafish.pojo.PageBean;
 import com.xiafish.pojo.Result;
 import com.xiafish.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+
 @Slf4j
 @RestController
 public class GoodsController {
@@ -16,8 +20,8 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
     @GetMapping("/goods/all")
-    public Result getGoods(String goodsName,Integer goodsCategoryId) {
-        List<Goods> goodsList=goodsService.getGoods(goodsName,goodsCategoryId);
+    public Result getGoods(@RequestBody Map<String,Object> goodsRequestBody) {
+        PageBean goodsList=goodsService.getGoods(goodsRequestBody);
         return Result.success(goodsList);
     }
 
@@ -30,7 +34,7 @@ public class GoodsController {
     }
 
     @PostMapping("/goods/purchase")
-    public Result purchaseById(@RequestParam("buyerId") Integer userId,
+    public Result purchaseById(@RequestAttribute("userId")  Integer userId,
                                @RequestParam("goodsId") Integer goodsId,
                                @RequestParam(value = "orderNum", defaultValue = "1") Integer orderNum){
         log.info("用户 {} 直接购买商品 {}，数量为 {}",userId,goodsId,orderNum);
@@ -38,8 +42,9 @@ public class GoodsController {
         return  Result.success();
     }
     @PutMapping("/goods/comment")
-    public Result releaseComments(@RequestBody GoodsComment goodsComment)
+    public Result releaseComments(@RequestAttribute("userId") Integer userId,@RequestBody GoodsComment goodsComment)
     {
+        goodsComment.setBuyerId(userId);
         log.info("发布商品评价 {}",goodsComment.toString());
         goodsService.releaseComment(goodsComment);
         return Result.success();
