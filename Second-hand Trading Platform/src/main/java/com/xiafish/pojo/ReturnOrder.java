@@ -21,4 +21,5 @@ public class ReturnOrder {
     private LocalDateTime orderDateTime;
     private String buyerName;
     private String sellerName;
+    private String goodsName;
 }
