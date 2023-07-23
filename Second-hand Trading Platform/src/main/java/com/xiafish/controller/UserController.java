@@ -27,6 +27,7 @@ public class UserController {
     public Result getUserInfo(@RequestAttribute("userId")  Integer userId){
         log.info("查询的用户id：{}", userId);
         User user = userService.getUserById(userId);
+        System.out.println(user);
         return Result.success(user);
     }
 
@@ -88,5 +89,24 @@ public class UserController {
     {
         userService.updateUserGoods(goods);
         return Result.success();
+    }
+
+    @GetMapping("/other/{userId}")
+    public Result otherInfo(@PathVariable Integer userId){
+        User user= userService.getUserById(userId);
+        return Result.success(user);
+    }
+
+    @GetMapping("other/goods/{userId}")
+    public Result getOtherGoods(@PathVariable Integer userId)
+    {
+        List<Goods> goodsList = userService.getGoodsByUserId(userId);
+        return Result.success(goodsList);
+    }
+    @GetMapping("other/comment/{userId}")
+    public Result getOtherComment(@PathVariable Integer userId)
+    {
+        List<UserComment> userCommentsList= userService.findComment(userId);
+        return Result.success(userCommentsList);
     }
 }

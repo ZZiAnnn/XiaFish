@@ -8,7 +8,8 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Select("select * from xiafish.user where user_id=#{userId}")
+    @Select("select user_id, user_name, user_phone_num, user_email, user_status, user_photo," +
+            " user_campus, user_nickname, user_profile, user_gender from xiafish.user where user_id=#{userId}")
     User getUserById(Integer userId);
 
     void updateUser(User user);
