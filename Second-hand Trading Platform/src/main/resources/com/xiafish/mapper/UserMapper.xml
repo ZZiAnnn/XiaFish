@@ -6,6 +6,7 @@
     <update id="updateUser" parameterType="com.xiafish.pojo.User">
         UPDATE xiafish.user
         <set>
+            <if test="userId != null">user_id = #{userId},</if>
             <if test="userName != null">user_name = #{userName},</if>
             <if test="userNickname != null">user_nickname = #{userNickname},</if>
             <if test="userGender != null">user_gender = #{userGender},</if>
@@ -60,6 +61,7 @@
     <update id="updateGoods" parameterType="com.xiafish.pojo.Goods">
         UPDATE xiafish.goods
         <set>
+            <if test="goodsId != null">goods_id = #{goodsId},</if>
             <if test="goodsName != null">goods_name=#{goodsName},</if>
             <if test="oriPrice != null">ori_price=#{oriPrice},</if>
             <if test="curPrice != null">cur_price=#{curPrice},</if>

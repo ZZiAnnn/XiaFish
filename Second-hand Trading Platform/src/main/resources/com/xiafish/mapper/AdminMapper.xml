@@ -62,6 +62,7 @@
     <update id="updateUser" parameterType="com.xiafish.pojo.User">
         UPDATE user
         <set>
+            <if test="userId != null">user_id = #{userId},</if>
             <if test="userName != null">user_name = #{userName},</if>
             <if test="userGender != null">user_gender = #{userGender},</if>
             <if test="userPhoneNum != null">user_phone_num = #{userPhoneNum},</if>

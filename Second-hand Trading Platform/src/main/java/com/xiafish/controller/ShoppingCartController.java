@@ -31,10 +31,12 @@ public class ShoppingCartController {
     }
     @GetMapping("/shoppingcart")
     public Result getCart(@RequestAttribute("userId") Integer userId){
-        log.info("分页查询用户{}的购物车信息，当前为第{}页，每页有{}条数据",userId);
+        log.info("分页查询用户{}的购物车信息",userId);
 
+        Long total= Long.valueOf(shoppingCartService.getCartCount(userId));
         List<ShoppingCart> list=shoppingCartService.getCart(userId);
-        return Result.success(list);
+        PageBean pageBean=new PageBean(total,list);
+        return Result.success(pageBean);
     }
     @PatchMapping("shoppingcart/update")
     public Result updateShoppingCart(@RequestAttribute("userId") Integer userId,@RequestBody ShoppingCart shoppingCart)
