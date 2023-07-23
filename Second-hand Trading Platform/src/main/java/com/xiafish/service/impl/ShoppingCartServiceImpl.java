@@ -31,18 +31,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public PageBean getCart(Integer userId, Integer page, Integer pageSize) {
-        // 设置分页参数
-        PageHelper.startPage(page,pageSize);
-        //执行条件分页查询
-        List<ShoppingCart> shoppingCartsList=shoppingCartMapper.getShoppingCartsList(userId);
-        //获取查询结果
-        Page<ShoppingCart> p = (Page<ShoppingCart>) shoppingCartsList;
-        // 封装PageBean
-        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
+    public List<ShoppingCart> getCart(Integer userId) {
 
-        // 返回查询结果
-        return pageBean;
+        List<ShoppingCart> shoppingCartsList=shoppingCartMapper.getShoppingCartsList(userId);
+
+        return shoppingCartsList;
     }
 
     @Override

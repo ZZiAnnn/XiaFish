@@ -5,6 +5,7 @@ import com.xiafish.service.AdminService;
 import com.xiafish.util.ValidationUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -48,6 +49,12 @@ public class AdminController {
     public Result updateUser(@RequestBody User user)
     {
         log.info("管理员更改用户信息：{}",user.toString());
+        //重新加密密码
+        if(user.getUserPasswd()!=null)
+        {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            user.setUserPasswd(encoder.encode(user.getUserPasswd()));
+        }
         if(!(user.getUserEmail().isEmpty())&&!(ValidationUtils.isValidEmail(user.getUserEmail())))
             return Result.error("Invalid email format");
         if(!(user.getUserPhoneNum().isEmpty())&&!(ValidationUtils.isValidPhoneNumber(user.getUserPhoneNum())))
