@@ -39,7 +39,6 @@ public class GoodsController {
                                @RequestParam("goodsId") Integer goodsId,
                                @RequestParam(value = "orderNum", defaultValue = "1") Integer orderNum){
         log.info("用户 {} 直接购买商品 {}，数量为 {}",userId,goodsId,orderNum);
-        goodsService.reduceInventory(goodsId,orderNum);
         goodsService.purchaseById(userId,goodsId,orderNum);
         return  Result.success();
     }

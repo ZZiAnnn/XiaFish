@@ -20,5 +20,4 @@ public interface GoodsService {
 
     void uploadImgs(Integer goodsId, List<String> urls);
 
-    void reduceInventory(Integer goodsId, Integer orderNum);
 }
