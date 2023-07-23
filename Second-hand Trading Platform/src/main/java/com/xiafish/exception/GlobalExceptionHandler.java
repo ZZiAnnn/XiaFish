@@ -20,13 +20,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result handleException(Exception ex) {
-
+        //输出错误信息
         ex.printStackTrace();
         //获取最底层的异常
-        Throwable cause = ex.getCause();
-        while(cause.getCause()!=null)
-        {
-            cause=cause.getCause();
+        Throwable cause = ex;
+        while(cause.getCause()!=null) {
+            cause = cause.getCause();
         }
 
         if(cause instanceof SQLException) {
