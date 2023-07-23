@@ -20,7 +20,8 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping("admin/user")
-    public Result findAllUser(@RequestParam(defaultValue = "1")Integer page, @RequestParam(defaultValue = "10")Integer pageSize, User user)
+    public Result findAllUser(@RequestParam(defaultValue = "1")Integer page,
+                              @RequestParam(defaultValue = "10")Integer pageSize, User user)
     {
         log.info("管理员查询用户条件：page={},pageSize={},User筛选条件={}",page,pageSize,user.toString());
         PageBean pageBean=adminService.findAllUser(page,pageSize,user);

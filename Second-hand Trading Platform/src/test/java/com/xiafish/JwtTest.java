@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 @SpringBootTest
 class JwtTest {
@@ -27,7 +28,8 @@ class JwtTest {
 
 	@Test
 	public void testParseJwt(){
-		String jwt="eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjIsImV4cCI6MTY4OTkyNzg1Nywic3RhdHVzIjoxfQ.jzwUkkiHHFpIck8W5EaaGJVXhzJdKK6Fl0lzrbmDX54";
+
+		String jwt="eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjMsImV4cCI6MTY5MDEyNTI2Mywic3RhdHVzIjoxfQ.X5BmessUp6aBvFTjVSggcDDMQl8uLTnzXnMEk7zfGLc";
 		Claims claims=Jwts.parser()
 				.setSigningKey("XiaXiaoYu")
 				.parseClaimsJws(jwt).getBody();

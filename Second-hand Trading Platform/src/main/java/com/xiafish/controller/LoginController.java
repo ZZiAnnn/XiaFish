@@ -67,7 +67,6 @@ public class LoginController implements HandlerInterceptor {
     @PostMapping("/login/email")
     public Result emailLogin(@RequestBody Map<String, String> loginBody){
         String email = loginBody.get("email");
-        System.out.println(email);
         // 检查邮箱是否为空
         if (email == null || email.isEmpty()) {
             return Result.error("Email cannot be empty.");
@@ -108,12 +107,18 @@ public class LoginController implements HandlerInterceptor {
             return Result.error("电话号码格式不正确");
         }
 
-        Integer userId=loginService.valid(email,phone);
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("id", userId);
-        claims.put("status",1);
-        String jwt = JwtUtils.generateJwt(claims);
-        return Result.success(jwt);
-    }
+        String storedCode=null;
+        if(phone!=null) storedCode=(String) redisTemplate.opsForValue().get(phone);
+        else storedCode=(String) redisTemplate.opsForValue().get(email);
 
+        if (storedCode != null && storedCode.toString().equals(valid)) {
+            Integer userId=loginService.valid(email,phone);
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", userId);
+            claims.put("status",1);
+            String jwt = JwtUtils.generateJwt(claims);
+            return Result.success(jwt);
+        }
+        else return Result.error("验证码错误");
+    }
 }

@@ -19,7 +19,7 @@ public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
-    @GetMapping("/goods/all")
+    @PostMapping("/goods/all")
     public Result getGoods(@RequestBody Map<String,Object> goodsRequestBody) {
         PageBean goodsList=goodsService.getGoods(goodsRequestBody);
         return Result.success(goodsList);

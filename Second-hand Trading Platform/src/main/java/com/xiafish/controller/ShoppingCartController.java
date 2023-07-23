@@ -64,9 +64,8 @@ public class ShoppingCartController {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setUserId(userId);
         for (Integer shoppingCartId : shoppingCartIds) {
-            log.info("购物车删除：{}", shoppingCart.toString());
+            log.info("购物车删除：{}", shoppingCart);
             shoppingCartService.deleteShoppingCart(shoppingCart);
-
         }
         return Result.success();
     }
