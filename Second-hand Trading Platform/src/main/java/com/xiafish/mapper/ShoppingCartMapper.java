@@ -26,4 +26,7 @@ public interface ShoppingCartMapper {
 
     @Delete("delete from xiafish.shopping_cart where shopping_cart_id=#{shoppingCartId} and user_id =#{userId}")
     void deleteShoppingCart(ShoppingCart shoppingCart);
+
+    @Select("select count(*) from xiafish.shopping_cart where user_id =#{userId}")
+    Integer getCartCount(Integer userId);
 }

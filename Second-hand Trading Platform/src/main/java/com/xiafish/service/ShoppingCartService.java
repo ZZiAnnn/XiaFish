@@ -17,4 +17,6 @@ public interface ShoppingCartService {
 
     void deleteShoppingCart(ShoppingCart shoppingCart);
 
+    Integer getCartCount(Integer userId);
+
 }
