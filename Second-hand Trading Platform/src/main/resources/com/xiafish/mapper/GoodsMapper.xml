@@ -19,10 +19,10 @@
         <where>
             <if test="goodsName != null and goodsName != ''">goods_name like concat('%',#{goodsName},'%')</if>
             <if test="goodsCategoryName != null and goodsCategoryName != ''">and goods_category_name = #{goodsCategoryName}</if>
-            <if test="begin != null and begin != ''">and release_time = #{begin}</if>
-            <if test="end != null and end != ''">and release_time = #{end}</if>
-            <if test="lowPrice != null and lowPrice != ''">and cur_price >= #{lowPrice}</if>
-            <if test="highPrice != null and highPrice != ''">and cur_price = #{highPrice}</if>
+            <if test="begin != null ">and release_time = #{begin}</if>
+            <if test="end != null ">and release_time = #{end}</if>
+            <if test="lowPrice != null ">and cur_price >= #{lowPrice}</if>
+            <if test="highPrice != null ">and cur_price = #{highPrice}</if>
             <if test="campus != null and campus != ''">and user.user_campus like #{campus}</if>
         </where>
         order by release_time
