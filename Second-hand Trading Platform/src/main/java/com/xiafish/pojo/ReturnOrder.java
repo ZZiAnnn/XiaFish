@@ -22,4 +22,5 @@ public class ReturnOrder {
     private String buyerName;
     private String sellerName;
     private String goodsName;
+    private String goodsPhotos;
 }
