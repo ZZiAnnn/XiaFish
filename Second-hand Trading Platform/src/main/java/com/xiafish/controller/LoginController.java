@@ -6,6 +6,7 @@ import com.xiafish.service.LoginService;
 import com.xiafish.service.UserService;
 import com.xiafish.util.EmailSendUtils;
 import com.xiafish.util.JwtUtils;
+import com.xiafish.util.MessageSendUtil;
 import com.xiafish.util.ValidationUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class LoginController implements HandlerInterceptor {
 
     @Autowired
     private EmailSendUtils emailSendUtils;
+
+    @Autowired
+    private MessageSendUtil messageSendUtil;
 
     @PostMapping("/login")
     public Result login(@RequestBody Map<String, Object> loginBody)throws BadCredentialsException
@@ -87,6 +91,32 @@ public class LoginController implements HandlerInterceptor {
             return Result.success();
         }else {
             return Result.error("The email is not registered.");
+        }
+    }
+
+    @PostMapping("/login/phone")
+    public Result phoneLogin(@RequestBody Map<String, String> loginBody) throws Exception {
+        String phone = loginBody.get("phone");
+        // 检查号码是否为空
+        if (phone == null || phone.isEmpty()) {
+            return Result.error("Email cannot be empty.");
+        }
+
+        if(loginService.checkPhone(phone)){
+            String verificationCode = ValidationUtils.generateVerificationCode();
+            // 存储验证码到 Redis，并设置有效期
+            String redisKey = phone;
+
+            // 发送验证码到用户邮箱，调用相应的邮件发送服务
+            log.info("正在向手机号{}发送验证码",phone);
+            messageSendUtil.send(verificationCode,phone);
+            log.info("成功向手机号{}发送验证码",phone);
+
+            redisTemplate.opsForValue().set(redisKey, verificationCode);
+            redisTemplate.expire(redisKey, 5, TimeUnit.MINUTES);
+            return Result.success();
+        }else {
+            return Result.error("The phone is not registered.");
         }
     }
 

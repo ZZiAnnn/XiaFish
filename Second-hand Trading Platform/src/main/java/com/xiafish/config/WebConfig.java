@@ -14,9 +14,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-
-
-
 @Configuration
 //用于禁用Spring Boot的安全自动配置
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class })
@@ -32,7 +29,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").order(1);
         registry.addInterceptor(adminCheckInterceptor).addPathPatterns("/admin/**").order(2);
     }
-
 
     @Bean
     public CorsFilter corsFilter() {

@@ -19,6 +19,6 @@ public class Order {
     private Integer goodsId;
     private Integer orderNum;
     private Float orderSumPrice;
-    private String orderStatus;
+    private String orderStatus;//订单的状态
     private LocalDateTime orderDateTime;
 }

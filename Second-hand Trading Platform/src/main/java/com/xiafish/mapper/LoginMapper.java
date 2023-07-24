@@ -20,4 +20,7 @@ public interface LoginMapper {
     @Select("select user_id from xiafish.user " +
             "where user_email=#{email} or user_phone_num=#{phone}")
     Integer findByEmailOrPhone(String email, String phone);
+
+    @Select("select * from xiafish.user where user_phone_num=#{phone}")
+    Integer findByPhone(String phone);
 }

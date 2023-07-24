@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 分页模板，使用泛型向前端返回分页信息
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

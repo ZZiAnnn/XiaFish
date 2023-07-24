@@ -16,13 +16,13 @@ import java.util.List;
 public class Goods {
     private Integer goodsId;
     private String goodsName;
-    private Float oriPrice;
-    private Float curPrice;
+    private Float oriPrice;//商品原价
+    private Float curPrice;//商品现价
     private String goodsCategoryName;
     private Integer sellerId;
     private LocalDateTime releaseTime;
-    private Integer inventory;
-    private String  goodsProfile;
+    private Integer inventory;//商品库存
+    private String  goodsProfile;//商品简介
     private String goodsPhotos;
     private String goodsCampus;
 }

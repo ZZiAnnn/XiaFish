@@ -34,4 +34,9 @@ public class LoginServiceImpl implements LoginService {
     public boolean checkEmail(String email) {
         return !(loginMapper.findByEmail(email)==0);
     }
+
+    @Override
+    public boolean checkPhone(String phone) {
+        return !(loginMapper.findByPhone(phone)==0);
+    }
 }

@@ -10,4 +10,6 @@ public interface LoginService {
     Integer valid(String email, String phone);
 
     boolean checkEmail(String email);
+
+    boolean checkPhone(String phone);
 }
