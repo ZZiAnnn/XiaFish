@@ -12,4 +12,7 @@ public class UserComment {
     private Integer buyerId;
     private Integer sellerId;
     private String userCommentContent;
+
+    private String buyerName;
+    private String buyerPhoto;
 }
