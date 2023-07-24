@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
         userMapper.updateGoods(goods);
     }
 
+    @Override
+    public void updateOrder(Order order) {
+        userMapper.updateOrder(order);
+    }
+
 }

@@ -80,7 +80,15 @@ public class UserController {
         List<ReturnOrder> userOrdersList= userService.findOrder(userId);
         return Result.success(userOrdersList);
     }
-    
+
+    @PatchMapping("user/order/update")
+    public Result updateOrder(@RequestAttribute("userId")  Integer userId,@RequestBody Order order)
+    {
+        order.setBuyerId(userId);
+        userService.updateOrder(order);
+        return Result.success();
+    }
+
     @GetMapping("user/comment")
     public Result findComment(@RequestAttribute("userId")  Integer userId)
     {
