@@ -73,4 +73,15 @@
         </set>
         WHERE goods_id=#{goodsId}
     </update>
+
+    <select id="selectOrder" resultType="com.xiafish.pojo.ReturnOrder">
+        select o.*, buyer.user_name as buyerName, seller.user_name as sellerName, goods.goods_name, goods.goods_photos
+        from xiafish.`order` o
+        left join xiafish.user buyer on o.buyer_id = buyer.user_id
+        left join xiafish.user seller on o.seller_id = seller.user_id
+        left join xiafish.goods on o.goods_id = goods.goods_id
+        <where>
+            o.seller_id = #{userid}
+        </where>
+    </select>
 </mapper>

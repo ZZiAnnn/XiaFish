@@ -74,15 +74,15 @@ public class UserController {
     }
 
     //查询用户的订单
-    @GetMapping("user/order/{userid}")
-    public Result findOrder(@PathVariable Integer userid)
+    @GetMapping("user/order")
+    public Result findOrder(@RequestAttribute("userId")  Integer userId)
     {
-        List<Order> userOrdersList= userService.findOrder(userid);
+        List<ReturnOrder> userOrdersList= userService.findOrder(userId);
         return Result.success(userOrdersList);
     }
     
-    @GetMapping("user/comment/{userId}")
-    public Result findComment(@PathVariable Integer userId)
+    @GetMapping("user/comment")
+    public Result findComment(@RequestAttribute("userId")  Integer userId)
     {
         List<UserComment> userCommentsList= userService.findComment(userId);
         return Result.success(userCommentsList);

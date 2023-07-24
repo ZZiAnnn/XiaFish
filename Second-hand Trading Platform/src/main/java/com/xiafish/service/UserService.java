@@ -19,7 +19,7 @@ public interface UserService {
 
     List<ShoppingCart> viewShoppingCart(Integer userid);
 
-    List<Order> findOrder(Integer userid);
+    List<ReturnOrder> findOrder(Integer userid);
     void updateHeadImg(Integer userId, String url);
 
     void updateUserGoods(Goods goods);

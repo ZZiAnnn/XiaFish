@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Order> findOrder(Integer userid) {
+    public List<ReturnOrder> findOrder(Integer userid) {
         return userMapper.selectOrder(userid);
     }
 

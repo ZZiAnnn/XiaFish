@@ -21,12 +21,15 @@ public interface UserMapper {
     void addGoods(Goods goods);
     void deleteGoods(Integer userId,List<Integer> goodsids);
 
-    @Select("select * from xiafish.user_comment where seller_id = #{userid}")
+    @Select("select user_comment.*,user.user_id as buyerName,user.user_photo as buyerPhoto from xiafish.user_comment " +
+            "left join xiafish.user on user.user_id=user_comment.buyer_id " +
+            "where seller_id = #{userid}")
     List<UserComment> selectComment(Integer userid);
     @Select("select * from xiafish.shopping_cart where user_id=#{userid}")
     List<ShoppingCart> selectShoppingCart(Integer userid);
-    @Select("select * from xiafish.`order` where buyer_id = #{userid}")
-    List<Order> selectOrder(Integer userid);
+
+
+    List<ReturnOrder> selectOrder(Integer userid);
 
     @Update("update xiafish.user set user_photo=#{url} where user_id=#{userId}")
     void updateHeadImg(Integer userId, String url);
