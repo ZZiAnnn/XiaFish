@@ -10,6 +10,7 @@ import com.xiafish.pojo.ReturnOrder;
 import com.xiafish.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -60,11 +61,13 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    @Transactional(rollbackFor=Exception.class)//事务管理（操作失败时回滚）
     public void purchaseById(Integer userId, Integer goodsId, Integer orderNum) {
         Integer sellerId=goodsMapper.getSellerId(goodsId);
         Float goodsPrice=goodsMapper.getGoodsPrice(goodsId);
         String orderStatus="已下单";
 
+        goodsMapper.reduceInventory(goodsId,orderNum);
         goodsMapper.purchaseById(userId,sellerId,goodsId,orderNum,
                 orderNum*goodsPrice,orderStatus,LocalDateTime.now());
     }
@@ -78,4 +81,5 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.insertImages(goodsId,urls);
 
     }
+
 }

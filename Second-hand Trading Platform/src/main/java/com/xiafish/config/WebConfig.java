@@ -29,7 +29,9 @@ public class WebConfig implements WebMvcConfigurer {
     private AdminCheckInterceptor adminCheckInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").order(1);
+        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").
+                excludePathPatterns("/goods","/goods/all","/login/**","/signup","/valid")
+                .order(1);
         registry.addInterceptor(adminCheckInterceptor).addPathPatterns("/admin/**").order(2);
     }
 
