@@ -37,6 +37,7 @@ public class GlobalExceptionHandler {
         if(cause instanceof BadCredentialsException) {
             return handleBadCredentialsException(cause);
         }
+
         return Result.error("对不起操作失败，请联系管理员");
     }
 

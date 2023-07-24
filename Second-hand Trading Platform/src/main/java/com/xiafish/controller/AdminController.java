@@ -63,7 +63,7 @@ public class AdminController {
         adminService.updateUser(user);
         return Result.success();
     }
-    @GetMapping("admin/orders")
+    @PostMapping("admin/orders")
     public Result getOrders(@RequestBody Map<String,Object> orderBody)
     {
         Integer page=(Integer) orderBody.get("page");

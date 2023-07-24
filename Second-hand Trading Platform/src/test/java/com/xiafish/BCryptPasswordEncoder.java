@@ -1,12 +1,9 @@
 package com.xiafish;
 
+import org.springframework.stereotype.Component;
+
 
 public class BCryptPasswordEncoder {
-
-    public static void main(String[] args) {
-        passwordEncode("1");
-    }
-
     public static void passwordEncode(String password)
     {
         // 使用BCryptPasswordEncoder进行密码加密

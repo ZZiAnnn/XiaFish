@@ -3,13 +3,11 @@ import java.util.Map;
 
 public interface LoginService {
 
-    Map<String, Object> getIdByUserName(String username);
+    String login(String username, String password) throws Exception;
 
-    Integer getStatusByUserId(Integer userId);
+    void loginPhone(String phone) throws Exception;
 
-    Integer valid(String email, String phone);
+    void loginEmail(String email) throws Exception;
 
-    boolean checkEmail(String email);
-
-    boolean checkPhone(String phone);
+    String checkVerification(String email, String phone, String valid)throws Exception;
 }
