@@ -22,7 +22,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    //查询用户信息
     @GetMapping("/user")
     public Result getUserInfo(@RequestAttribute("userId")  Integer userId){
         log.info("查询的用户id：{}", userId);
@@ -31,6 +31,7 @@ public class UserController {
         return Result.success(user);
     }
 
+    //更新用户信息
     @PatchMapping("/user/update")
     public Result updateUser(@RequestBody User user){
         try {
@@ -42,12 +43,15 @@ public class UserController {
          return Result.error(e.getMessage());
         }
     }
+
+    //查询用户商品
     @GetMapping("user/goods")
     public Result getGoodsByUserId(@RequestAttribute("userId")  Integer userId)
     {
             List<Goods> goodsList = userService.getGoodsByUserId(userId);
             return Result.success(goodsList);
     }
+    //用户发布商品
     @PutMapping("user/release")
     public Result releaseGoods(@RequestAttribute("userId")  Integer userId,
                                @RequestBody Goods goods)
@@ -58,6 +62,8 @@ public class UserController {
             userService.releaseGoods(goods,userId);
             return Result.success();
     }
+
+    //用户删除已发布的商品
     @DeleteMapping("user/goods/{goodsIds}")
     public Result deleteGoods(@PathVariable List<Integer> goodsIds,
                               @RequestAttribute("userId")  Integer userId)
@@ -66,12 +72,15 @@ public class UserController {
         userService.deleteGoods(userId,goodsIds);
         return Result.success();
     }
+
+    //查询用户的订单
     @GetMapping("user/order/{userid}")
     public Result findOrder(@PathVariable Integer userid)
     {
         List<Order> userOrdersList= userService.findOrder(userid);
         return Result.success(userOrdersList);
     }
+    
     @GetMapping("user/comment/{userId}")
     public Result findComment(@PathVariable Integer userId)
     {
