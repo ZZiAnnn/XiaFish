@@ -77,7 +77,7 @@ public class UserController {
     @GetMapping("user/order")
     public Result findOrder(@RequestAttribute("userId")  Integer userId)
     {
-        List<Order> userOrdersList= userService.findOrder(userId);
+        List<ReturnOrder> userOrdersList= userService.findOrder(userId);
         return Result.success(userOrdersList);
     }
     
