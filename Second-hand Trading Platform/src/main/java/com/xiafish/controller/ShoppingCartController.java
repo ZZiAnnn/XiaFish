@@ -60,10 +60,11 @@ public class ShoppingCartController {
 
     }
     @DeleteMapping("shoppingcart/delete")
-    public Result deleteShoppingCart(@RequestAttribute("userId") Integer userId,@RequestBody List<Integer> shoppingCartIds) {
+    public Result deleteShoppingCart(@RequestAttribute("userId") Integer userId,@RequestParam List<Integer> shoppingCartIds) {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setUserId(userId);
         for (Integer shoppingCartId : shoppingCartIds) {
+            shoppingCart.setShoppingCartId(shoppingCartId);
             log.info("购物车删除：{}", shoppingCart);
             shoppingCartService.deleteShoppingCart(shoppingCart);
         }
