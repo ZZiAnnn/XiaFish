@@ -21,7 +21,7 @@ public interface UserMapper {
     void addGoods(Goods goods);
     void deleteGoods(Integer userId,List<Integer> goodsids);
 
-    @Select("select user_comment.*,user.user_id as buyerName,user.user_photo as buyerPhoto from xiafish.user_comment " +
+    @Select("select user_comment.*,user.user_name as buyerName,user.user_photo as buyerPhoto from xiafish.user_comment " +
             "left join xiafish.user on user.user_id=user_comment.buyer_id " +
             "where seller_id = #{userid}")
     List<UserComment> selectComment(Integer userid);

@@ -81,7 +81,7 @@
         left join xiafish.user seller on o.seller_id = seller.user_id
         left join xiafish.goods on o.goods_id = goods.goods_id
         <where>
-            o.seller_id = #{userid}
+            o.seller_id = #{userid} or o.buyer_id = #{userid}
         </where>
     </select>
 </mapper>
