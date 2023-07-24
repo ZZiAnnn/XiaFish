@@ -22,32 +22,12 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        //1.get url
+        //get url
         String url= request.getRequestURI();
         log.info("url:{}",url);
 
-        //2.判断url是否包含login或者signup
-        //todo:可以使用构建类的方式来实现工程化与解耦合
-//        if(url.contains("login")){
-//            log.info("登录操作，放行...");
-//            return true;
-//        }
-//        else if(url.contains("signup")){
-//            log.info("注册操作，放行...");
-//            return true;
-//        }
-//        else if(url.contains("goods/all")){
-//            log.info("主页面，放行...");
-//            return true;
-//        }
-//        else if(url.contains("valid")){
-//            log.info("提交验证码，放行...");
-//            return true;
-//        }
-
-        //3.获取令牌
         String jwt=request.getHeader("token");
-        //4.判断令牌是否存在
+        //判断令牌是否存在
         if(!StringUtils.hasLength(jwt)){
             log.info("token为空，返回未登录");
             Result error=Result.error("NOT_LOGIN");
@@ -58,7 +38,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        //5.解析token
+        //解析token
         Integer userId,userStatus;
         try {
             userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
@@ -75,7 +55,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         }
         request.setAttribute("userId", userId);
         request.setAttribute("userStatus", userStatus);
-        //6.放行
+
         return true;
     }
 
