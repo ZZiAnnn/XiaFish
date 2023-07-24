@@ -11,7 +11,9 @@ import com.xiafish.service.ShoppingCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -44,6 +46,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    @Transactional(rollbackFor=Exception.class)//事务管理（操作失败时回滚）
     public void buyFromShoppingCart(ShoppingCart shoppingCart) {
         Order order=new Order();
         shoppingCart=shoppingCartMapper.getShoppingCartById(shoppingCart.getShoppingCartId());
@@ -56,6 +59,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         order.setOrderDateTime(LocalDateTime.now());
         //设置状态为已拍下
         order.setOrderStatus("1");
+        goodsMapper.reduceInventory(shoppingCart.getGoodsId(),shoppingCart.getCollectNum());
         orderMapper.addOrder(order);
 
     }

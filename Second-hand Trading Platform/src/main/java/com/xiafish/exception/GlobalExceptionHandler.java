@@ -72,6 +72,9 @@ public class GlobalExceptionHandler {
         if (message.contains("a foreign key constraint fails")) {
             return Result.error("插入数据存在外键问题");
         }
+        if (message.contains("goods_inventory_constraint")) {
+            return Result.error("商品库存不足");
+        }
         return Result.error(cause.getMessage());
     }
     // 处理ConnectException类异常

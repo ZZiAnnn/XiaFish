@@ -10,14 +10,14 @@
             <if test="userId != null">user_id = #{userId},</if>
             <if test="userName != null">and user_name like concat('%',#{userName},'%') </if>
             <if test="userGender != null">and user_gender = #{userGender} </if>
-            <if test="userPhoneNum != null">and user_phone_num = #{userPhoneNum} </if>
-            <if test="userEmail != null">and user_email = #{userEmail} </if>
+            <if test="userPhoneNum != null">and user_phone_num like concat('%',#{userPhoneNum},'%') </if>
+            <if test="userEmail != null">and user_email like concat('%',#{userEmail},'%') </if>
             <if test="userPasswd != null">and user_passwd = #{userPasswd} </if>
             <if test="userStatus != null">and user_status = #{userStatus} </if>
             <if test="userPhoto != null">and user_photo = #{userPhoto} </if>
-            <if test="userCampus != null">and user_campus = #{userCampus} </if>
+            <if test="userCampus != null">and user_campus like concat('%',#{userCampus},'%') </if>
             <if test="userNickname != null">and user_nickname like concat('%',#{userNickname},'%') </if>
-            <if test="userProfile != null">and user_profile = #{userProfile} </if>
+            <if test="userProfile != null">and user_profile like concat('%',#{userProfile},'%') </if>
         </where>
     </select>
     <delete id="deleteUser">

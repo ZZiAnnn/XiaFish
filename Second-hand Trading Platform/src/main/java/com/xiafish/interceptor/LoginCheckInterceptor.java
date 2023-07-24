@@ -28,22 +28,23 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         //2.判断url是否包含login或者signup
         //todo:可以使用构建类的方式来实现工程化与解耦合
-        if(url.contains("login")){
-            log.info("登录操作，放行...");
-            return true;
-        }
-        else if(url.contains("signup")){
-            log.info("注册操作，放行...");
-            return true;
-        }
-        else if(url.contains("goods/all")){
-            log.info("主页面，放行...");
-            return true;
-        }
-        else if(url.contains("valid")){
-            log.info("提交验证码，放行...");
-            return true;
-        }
+//        if(url.contains("login")){
+//            log.info("登录操作，放行...");
+//            return true;
+//        }
+//        else if(url.contains("signup")){
+//            log.info("注册操作，放行...");
+//            return true;
+//        }
+//        else if(url.contains("goods/all")){
+//            log.info("主页面，放行...");
+//            return true;
+//        }
+//        else if(url.contains("valid")){
+//            log.info("提交验证码，放行...");
+//            return true;
+//        }
+
         //3.获取令牌
         String jwt=request.getHeader("token");
         //4.判断令牌是否存在

@@ -7,6 +7,7 @@ import com.xiafish.pojo.Result;
 import com.xiafish.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -33,6 +34,7 @@ public class GoodsController {
     }
 
     @PostMapping("/goods/purchase")
+    @Transactional(rollbackFor=Exception.class)//事务管理（操作失败时回滚）
     public Result purchaseById(@RequestAttribute("userId")  Integer userId,
                                @RequestParam("goodsId") Integer goodsId,
                                @RequestParam(value = "orderNum", defaultValue = "1") Integer orderNum){
