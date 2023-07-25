@@ -38,6 +38,12 @@ public class AdminController {
     public Result addUser(@RequestBody User user)
     {
         log.info("管理员新建用户：{}",user.toString());
+        String password=user.getUserPasswd();
+        if(password!=null && !password.equals(""))
+        {
+            // 使用BCryptPasswordEncoder进行密码加密
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            user.setUserPasswd(encoder.encode(password));}
         if((user.getUserEmail()!=null)&&!(ValidationUtils.isValidEmail(user.getUserEmail())))
             return Result.error("Invalid email format");
         if((user.getUserPhoneNum()!=null)&&!(ValidationUtils.isValidPhoneNumber(user.getUserPhoneNum())))

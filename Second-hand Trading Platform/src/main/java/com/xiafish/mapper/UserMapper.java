@@ -15,7 +15,7 @@ public interface UserMapper {
     void updateUser(User user);
 
     @Select("select * from xiafish.goods " +
-            "where seller_id=#{userId}")
+            "where seller_id=#{userId} order by release_time desc")
     List<Goods> goodsList(Integer userId);
 
     void addGoods(Goods goods);
