@@ -9,7 +9,7 @@
             <if test="buyerId != null ">buyer_id,</if>
             <if test="sellerId != null ">seller_id,</if>
             <if test="goodsId != null ">goods_id,</if>
-            <if test="orderNum != null a">order_num,</if>
+            <if test="orderNum != null ">order_num,</if>
             <if test="orderSumPrice != null ">order_sum_price,</if>
             <if test="orderStatus != null and orderStatus != ''">order_status,</if>
             <if test="orderDateTime != null ">order_date_time,</if>

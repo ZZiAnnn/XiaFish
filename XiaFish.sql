@@ -37,6 +37,7 @@ CREATE TABLE `goods`  (
   INDEX `fk_goods_user_idx`(`seller_id` ASC) USING BTREE,
   INDEX `fk_goods_category_idx`(`goods_category_name` ASC) USING BTREE,
   CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`seller_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `goods_inventory_constraint` CHECK (`inventory` >= 0)
 ) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -279,7 +280,6 @@ CREATE TABLE `shopping_cart`  (
   UNIQUE INDEX `user_goods_unique`(`user_id` ASC, `goods_id` ASC) USING BTREE,
   INDEX `fk_collect_goods_idx`(`goods_id` ASC) USING BTREE,
   CONSTRAINT `fk_shoppingcart_goods` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`goods_id`) ON DELETE SET NULL ON UPDATE RESTRICT,
-  CONSTRAINT `goods_inventory_constraint` CHECK (`collect_time` >= 0)
 ) ENGINE = InnoDB AUTO_INCREMENT = 119 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
