@@ -21,4 +21,5 @@ public class Order {
     private Float orderSumPrice;
     private String orderStatus;//订单的状态
     private LocalDateTime orderDateTime;
+
 }

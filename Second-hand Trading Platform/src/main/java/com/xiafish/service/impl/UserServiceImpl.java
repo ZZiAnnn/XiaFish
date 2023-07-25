@@ -18,22 +18,23 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
     @Override
     public User getUserById(Integer userId) {
         return userMapper.getUserById(userId);
     }
 
     @Override
-    public void updateUser(User user) throws RuntimeException{
+    public void updateUser(User user) throws RuntimeException {
         String email = user.getUserEmail();
         String phoneNumber = user.getUserPhoneNum();
 
         // 验证邮箱和电话号码的格式
-        if (email!=null && !ValidationUtils.isValidEmail(email)) {
+        if (email != null && !ValidationUtils.isValidEmail(email)) {
             throw new IllegalArgumentException("Invalid email format");
         }
 
-        if (phoneNumber!=null && !ValidationUtils.isValidPhoneNumber(phoneNumber)) {
+        if (phoneNumber != null && !ValidationUtils.isValidPhoneNumber(phoneNumber)) {
             throw new IllegalArgumentException("Invalid phone number format");
         }
         userMapper.updateUser(user);
@@ -45,14 +46,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void releaseGoods(Goods goods,Integer userId) {
+    public void releaseGoods(Goods goods, Integer userId) {
         goods.setSellerId(userId);
         userMapper.addGoods(goods);
     }
 
     @Override
-    public void deleteGoods(Integer userId,List<Integer> goodsIds) {
-        userMapper.deleteGoods(userId,goodsIds);
+    public void deleteGoods(Integer userId, List<Integer> goodsIds) {
+        userMapper.deleteGoods(userId, goodsIds);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateHeadImg(Integer userId, String url) {
-        userMapper.updateHeadImg(userId,url);
+        userMapper.updateHeadImg(userId, url);
     }
 
     @Override

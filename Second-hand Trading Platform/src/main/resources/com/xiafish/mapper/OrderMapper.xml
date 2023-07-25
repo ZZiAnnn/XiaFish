@@ -12,7 +12,7 @@
             <if test="orderNum != null and orderNum != ''">order_num,</if>
             <if test="orderSumPrice != null and orderSumPrice != ''">order_sum_price,</if>
             <if test="orderStatus != null and orderStatus != ''">order_status,</if>
-            <if test="orderDateTime != null and orderDateTime != ''">order_date_time,</if>
+            <if test="orderDateTime != null">order_date_time,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -22,7 +22,7 @@
             <if test="orderNum != null and orderNum != ''">#{orderNum},</if>
             <if test="orderSumPrice != null and orderSumPrice != ''">#{orderSumPrice},</if>
             <if test="orderStatus != null and orderStatus != ''">#{orderStatus},</if>
-            <if test="orderDateTime != null and orderDateTime != ''">#{orderDateTime},</if>
+            <if test="orderDateTime != null">#{orderDateTime},</if>
         </trim>
     </insert>
 </mapper>

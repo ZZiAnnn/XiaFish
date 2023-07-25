@@ -18,12 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminCheckInterceptor implements HandlerInterceptor {
     @Autowired
     UserService userService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Integer status=(Integer) request.getAttribute("userStatus");
-        if(status!=0){
-            Result error=Result.error("NOT_ADMIN");
-            String notLogin= JSONObject.toJSONString(error);
+        Integer status = (Integer) request.getAttribute("userStatus");
+        if (status != 0) {
+            Result error = Result.error("NOT_ADMIN");
+            String notLogin = JSONObject.toJSONString(error);
             //设置响应头（告知浏览器：响应的数据类型为json、响应的数据编码表为utf-8）
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(notLogin);

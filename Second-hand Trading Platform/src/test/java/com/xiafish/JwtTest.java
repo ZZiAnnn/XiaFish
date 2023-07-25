@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-@SpringBootTest
+
 class JwtTest {
 	@Test
 	public void testGenJwt(){
@@ -29,7 +29,7 @@ class JwtTest {
 	@Test
 	public void testParseJwt(){
 
-		String jwt="eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjMsImV4cCI6MTY5MDEyNTI2Mywic3RhdHVzIjoxfQ.X5BmessUp6aBvFTjVSggcDDMQl8uLTnzXnMEk7zfGLc";
+		String jwt="eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OSwiZXhwIjoxNjkwMjA4OTAwLCJzdGF0dXMiOjB9.NSqOCWz0CXzNCssnmUszi5tDCcewyjmnJUcqbtAeotE";
 		Claims claims=Jwts.parser()
 				.setSigningKey("XiaXiaoYu")
 				.parseClaimsJws(jwt).getBody();

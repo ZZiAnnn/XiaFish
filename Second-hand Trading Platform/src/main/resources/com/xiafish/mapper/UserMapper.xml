@@ -28,7 +28,7 @@
             <if test="curPrice != null and curPrice != ''">cur_price,</if>
             <if test="goodsCategoryName != null and goodsCategoryName != ''">goods_category_name,</if>
             <if test="sellerId != null and sellerId != ''">seller_id,</if>
-            <if test="releaseTime != null and releaseTime != ''">release_time,</if>
+            <if test="releaseTime != null">release_time,</if>
             <if test="inventory != null and inventory != ''">inventory,</if>
             <if test="goodsProfile != null and goodsProfile != ''">goods_profile,</if>
             <if test="goodsPhotos!=null and goodsPhotos != ''"> goods_photos</if>
@@ -40,7 +40,7 @@
             <if test="curPrice != null and curPrice != ''">#{curPrice},</if>
             <if test="goodsCategoryName != null and goodsCategoryName != ''">#{goodsCategoryName},</if>
             <if test="sellerId != null and sellerId != ''">#{sellerId},</if>
-            <if test="releaseTime != null and releaseTime != ''">#{releaseTime},</if>
+            <if test="releaseTime != null">#{releaseTime},</if>
             <if test="inventory != null and inventory != ''">#{inventory},</if>
             <if test="goodsProfile != null and goodsProfile != ''">#{goodsProfile},</if>
             <if test="goodsPhotos!=null and goodsPhotos != ''"> #{goodsPhotos}</if>

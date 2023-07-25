@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiafish.mapper.AdminMapper">
+
     <select id="list" resultType="com.xiafish.pojo.User">
         select *
         from xiafish.user
@@ -20,6 +21,7 @@
             <if test="userProfile != null and userProfile != ''">and user_profile like concat('%',#{userProfile},'%') </if>
         </where>
     </select>
+
     <delete id="deleteUser">
         delete from xiafish.user
         <where>

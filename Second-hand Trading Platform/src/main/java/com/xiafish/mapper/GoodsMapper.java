@@ -12,7 +12,7 @@ import java.util.List;
 
 @Mapper
 public interface GoodsMapper {
-    
+
 
     @Select("select * from xiafish.goods where goods_id=#{id}")
     Goods getById(Integer id);
@@ -37,7 +37,7 @@ public interface GoodsMapper {
     void insertImages(Integer goodsId, List<String> urls);
 
     List<Goods> searchGoods(String goodsName, String goodsCategoryName, LocalDateTime begin,
-                            LocalDateTime end, Integer lowPrice,Integer highPrice,String campus);
+                            LocalDateTime end, Integer lowPrice, Integer highPrice, String campus);
 
     @Update("update xiafish.goods set goods.inventory = goods.inventory-#{orderNum} where goods.goods_id =#{goodsId}")
     void reduceInventory(Integer goodsId, Integer orderNum);

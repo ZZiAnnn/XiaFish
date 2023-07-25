@@ -20,33 +20,34 @@ public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
+
     @PostMapping("/goods/all")
-    public Result getGoods(@RequestBody Map<String,Object> goodsRequestBody) {
-        PageBean goodsList=goodsService.getGoods(goodsRequestBody);
+    public Result getGoods(@RequestBody Map<String, Object> goodsRequestBody) {
+        PageBean goodsList = goodsService.getGoods(goodsRequestBody);
         return Result.success(goodsList);
     }
 
     @GetMapping("/goods")
-    public Result getGoodsById(@RequestParam("goodsId") Integer Id){
-        log.info("根据商品id查找商品{}",Id);
-        Goods goods=goodsService.getGoodsById(Id);
+    public Result getGoodsById(@RequestParam("goodsId") Integer Id) {
+        log.info("根据商品id查找商品{}", Id);
+        Goods goods = goodsService.getGoodsById(Id);
         return Result.success(goods);
     }
 
     @PostMapping("/goods/purchase")
-    @Transactional(rollbackFor=Exception.class)//事务管理（操作失败时回滚）
-    public Result purchaseById(@RequestAttribute("userId")  Integer userId,
+    @Transactional(rollbackFor = Exception.class)//事务管理（操作失败时回滚）
+    public Result purchaseById(@RequestAttribute("userId") Integer userId,
                                @RequestParam("goodsId") Integer goodsId,
-                               @RequestParam(value = "orderNum", defaultValue = "1") Integer orderNum){
-        log.info("用户 {} 直接购买商品 {}，数量为 {}",userId,goodsId,orderNum);
-        goodsService.purchaseById(userId,goodsId,orderNum);
-        return  Result.success();
+                               @RequestParam(value = "orderNum", defaultValue = "1") Integer orderNum) {
+        log.info("用户 {} 直接购买商品 {}，数量为 {}", userId, goodsId, orderNum);
+        goodsService.purchaseById(userId, goodsId, orderNum);
+        return Result.success();
     }
+
     @PutMapping("/goods/comment")
-    public Result releaseComments(@RequestAttribute("userId") Integer userId,@RequestBody GoodsComment goodsComment)
-    {
+    public Result releaseComments(@RequestAttribute("userId") Integer userId, @RequestBody GoodsComment goodsComment) {
         goodsComment.setBuyerId(userId);
-        log.info("发布商品评价 {}",goodsComment.toString());
+        log.info("发布商品评价 {}", goodsComment.toString());
         goodsService.releaseComment(goodsComment);
         return Result.success();
     }

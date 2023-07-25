@@ -38,9 +38,9 @@ public class LoginController implements HandlerInterceptor {
         String username = (String) loginBody.get("username");
         String password = (String) loginBody.get("password");
 
-        try{
-            return Result.success(loginService.login(username,password));
-        }catch (Exception ex){
+        try {
+            return Result.success(loginService.login(username, password));
+        } catch (Exception ex) {
             return Result.error(ex.getMessage());
         }
     }

@@ -23,15 +23,15 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //get url
-        String url= request.getRequestURI();
-        log.info("url:{}",url);
+        String url = request.getRequestURI();
+        log.info("url:{}", url);
 
-        String jwt=request.getHeader("token");
+        String jwt = request.getHeader("token");
         //判断令牌是否存在
-        if(!StringUtils.hasLength(jwt)){
+        if (!StringUtils.hasLength(jwt)) {
             log.info("token为空，返回未登录");
-            Result error=Result.error("NOT_LOGIN");
-            String notLogin= JSONObject.toJSONString(error);
+            Result error = Result.error("NOT_LOGIN");
+            String notLogin = JSONObject.toJSONString(error);
             //设置响应头（告知浏览器：响应的数据类型为json、响应的数据编码表为utf-8）
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(notLogin);
@@ -39,15 +39,15 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         }
 
         //解析token
-        Integer userId,userStatus;
+        Integer userId, userStatus;
         try {
             userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
             userStatus = JwtUtils.parseJwt(jwt).get("status", Integer.class);
-        }catch (JwtException e){
+        } catch (JwtException e) {
             //e.printStackTrace();
             log.info("令牌解析失败");
-            Result error=Result.error("NOT_LOGIN");
-            String notLogin=JSONObject.toJSONString(error);
+            Result error = Result.error("NOT_LOGIN");
+            String notLogin = JSONObject.toJSONString(error);
             //设置响应头（告知浏览器：响应的数据类型为json、响应的数据编码表为utf-8）
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(notLogin);

@@ -40,7 +40,6 @@ public class LoginServiceImpl implements LoginService {
         if(userIdAndPasswd==null) {
             throw new Exception("用户不存在");
         }
-
         Integer userId = (Integer) userIdAndPasswd.get("user_id");
         String userPasswd = (String) userIdAndPasswd.get("user_passwd");
 
