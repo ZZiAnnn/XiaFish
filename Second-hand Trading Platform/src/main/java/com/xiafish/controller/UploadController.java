@@ -3,6 +3,7 @@ package com.xiafish.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.xiafish.pojo.Result;
 import com.xiafish.service.GoodsService;
+import com.xiafish.service.UploadService;
 import com.xiafish.service.UserService;
 import com.xiafish.util.AliOSSUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -20,19 +21,10 @@ import java.util.List;
 public class UploadController {
 
     @Autowired
-    private AliOSSUtils aliOSSUtils;
-
+    private UploadService uploadService;
     @PostMapping("/upload/Imgs")
     public Result uploadPhotos(@RequestParam("photos") MultipartFile[] photos) throws IOException {
-
-        List<String> urls = new ArrayList<>();
-        for (MultipartFile photo : photos) {
-            log.info("文件上传{}", photo);
-            String url = aliOSSUtils.upload(photo);
-            log.info("文件上传成功，对应的url为:{}", url);
-            urls.add(url);
-        }
-        System.out.println(urls);
-        return Result.success(JSONObject.toJSONString(urls));
+        List<String>urls=uploadService.upload(photos);
+        return Result.success(urls);
     }
 }

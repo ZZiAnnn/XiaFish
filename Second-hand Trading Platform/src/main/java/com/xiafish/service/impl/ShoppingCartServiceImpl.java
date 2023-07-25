@@ -52,12 +52,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             if (goods == null) {
                 throw new Exception("对应的商品不存在");
             }
-
-            Order order = new Order(null, shoppingCart.getUserId(), goods.getSellerId(),
-                    shoppingCart.getGoodsId(), shoppingCart.getCollectNum(),
-                    goods.getCurPrice() * shoppingCart.getCollectNum(), "1",
-                    LocalDateTime.now());
-
+            Order order = new Order(null, shoppingCart.getUserId(), goods.getSellerId(), shoppingCart.getGoodsId(), shoppingCart.getCollectNum(), goods.getCurPrice() * shoppingCart.getCollectNum(), "已下单", LocalDateTime.now());
             goodsMapper.reduceInventory(shoppingCart.getGoodsId(), shoppingCart.getCollectNum());
             orderMapper.addOrder(order);
         }

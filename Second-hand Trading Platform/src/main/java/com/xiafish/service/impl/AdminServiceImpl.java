@@ -29,9 +29,8 @@ public class AdminServiceImpl implements AdminService {
         //获取查询结果
         Page<User> p = (Page<User>) userList;
         //封装PageBean
-        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
 
-        return pageBean;
+        return new PageBean(p.getTotal(), p.getResult());
     }
 
     @Override
@@ -64,8 +63,7 @@ public class AdminServiceImpl implements AdminService {
         Page<ReturnOrder> p = (Page<ReturnOrder>) orderList;
 
         // 封装PageBean
-        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
 
-        return pageBean;
+        return new PageBean(p.getTotal(), p.getResult());
     }
 }
