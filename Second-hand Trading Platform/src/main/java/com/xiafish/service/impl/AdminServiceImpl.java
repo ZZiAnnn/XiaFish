@@ -35,7 +35,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteUser(List<Integer> ids) {
-        adminMapper.deleteUser(ids);
+        //ids数量大于0才执行
+        if(ids.size()>0)adminMapper.deleteUser(ids);
     }
 
     @Override
