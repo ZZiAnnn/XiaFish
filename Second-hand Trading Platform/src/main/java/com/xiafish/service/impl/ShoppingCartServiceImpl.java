@@ -58,7 +58,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         order.setOrderSumPrice(goods.getCurPrice()*shoppingCart.getCollectNum());
         order.setOrderDateTime(LocalDateTime.now());
         //设置状态为已拍下
-        order.setOrderStatus("1");
+        order.setOrderStatus("已下单");
         goodsMapper.reduceInventory(shoppingCart.getGoodsId(),shoppingCart.getCollectNum());
         orderMapper.addOrder(order);
 

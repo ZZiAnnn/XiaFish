@@ -83,5 +83,6 @@
         <where>
             o.seller_id = #{userid} or o.buyer_id = #{userid}
         </where>
+        order by o.order_date_time desc
     </select>
 </mapper>
