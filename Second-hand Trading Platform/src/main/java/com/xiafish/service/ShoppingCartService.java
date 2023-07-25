@@ -13,7 +13,7 @@ public interface ShoppingCartService {
 
     void updateShoppingCart(ShoppingCart shoppingCart);
 
-    void buyFromShoppingCart(ShoppingCart shoppingCart);
+    void buyFromShoppingCart(Integer userId,List<Integer> shoppingCartIds) throws Exception;
 
     void deleteShoppingCart(ShoppingCart shoppingCart);
 

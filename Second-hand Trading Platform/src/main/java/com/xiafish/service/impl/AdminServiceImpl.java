@@ -19,12 +19,13 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
+
     @Override
     public PageBean findAllUser(Integer page, Integer pageSize, User user) {
         // 设置分页参数
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         //执行条件分页查询
-        List<User> userList=adminMapper.list(user);
+        List<User> userList = adminMapper.list(user);
         //获取查询结果
         Page<User> p = (Page<User>) userList;
         //封装PageBean
@@ -54,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
 
 
         // 设置分页参数
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
 
         // 执行条件分页查询
         List<ReturnOrder> orderList = adminMapper.getOrder(buyerName,sellerName,begin,end);
@@ -65,7 +66,6 @@ public class AdminServiceImpl implements AdminService {
         // 封装PageBean
         PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
 
-        // 返回查询结果
         return pageBean;
     }
 }

@@ -12,13 +12,13 @@ import java.util.List;
 
 @Mapper
 public interface AdminMapper {
-     List<User> list(User user) ;
+    List<User> list(User user);
 
-     void deleteUser(List<Integer> ids);
+    void deleteUser(List<Integer> ids);
 
-     void addUser(User user);
+    void addUser(User user);
 
-     void updateUser(User user);
+    void updateUser(User user);
 
      List<ReturnOrder> getOrder(String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end);
      @Select("select user_id from xiafish.user where user_name=#{userName}")

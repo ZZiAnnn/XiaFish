@@ -1,7 +1,5 @@
 package com.xiafish.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.xiafish.mapper.GoodsMapper;
 import com.xiafish.mapper.OrderMapper;
 import com.xiafish.mapper.ShoppingCartMapper;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,9 +32,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public List<ShoppingCart> getCart(Integer userId) {
 
-        List<ShoppingCart> shoppingCartsList=shoppingCartMapper.getShoppingCartsList(userId);
-
-        return shoppingCartsList;
+        return shoppingCartMapper.getShoppingCartsList(userId);
     }
 
     @Override
@@ -46,22 +41,26 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    @Transactional(rollbackFor=Exception.class)//事务管理（操作失败时回滚）
-    public void buyFromShoppingCart(ShoppingCart shoppingCart) {
-        Order order=new Order();
-        shoppingCart=shoppingCartMapper.getShoppingCartById(shoppingCart.getShoppingCartId());
-        order.setBuyerId(shoppingCart.getUserId());
-        order.setOrderNum(shoppingCart.getCollectNum());
-        order.setGoodsId(shoppingCart.getGoodsId());
-        Goods goods =goodsMapper.getById(shoppingCart.getGoodsId());
-        order.setSellerId(goods.getSellerId());
-        order.setOrderSumPrice(goods.getCurPrice()*shoppingCart.getCollectNum());
-        order.setOrderDateTime(LocalDateTime.now());
-        //设置状态为已拍下
-        order.setOrderStatus("已下单");
-        goodsMapper.reduceInventory(shoppingCart.getGoodsId(),shoppingCart.getCollectNum());
-        orderMapper.addOrder(order);
+    @Transactional(rollbackFor = Exception.class)//事务管理（操作失败时回滚）
+    public void buyFromShoppingCart(Integer userId, List<Integer> shoppingCartIds) throws Exception {
+        for (Integer shoppingCartId : shoppingCartIds) {
+            ShoppingCart shoppingCart = shoppingCartMapper.getShoppingCartById(shoppingCartId);
+            if (shoppingCart == null) {
+                throw new Exception("对应的购物车Id不存在");
+            }
+            Goods goods = goodsMapper.getById(shoppingCart.getGoodsId());
+            if (goods == null) {
+                throw new Exception("对应的商品不存在");
+            }
 
+            Order order = new Order(null, shoppingCart.getUserId(), goods.getSellerId(),
+                    shoppingCart.getGoodsId(), shoppingCart.getCollectNum(),
+                    goods.getCurPrice() * shoppingCart.getCollectNum(), "1",
+                    LocalDateTime.now());
+
+            goodsMapper.reduceInventory(shoppingCart.getGoodsId(), shoppingCart.getCollectNum());
+            orderMapper.addOrder(order);
+        }
     }
 
     @Override
