@@ -20,7 +20,7 @@ public interface AdminMapper {
 
      void updateUser(User user);
 
-     List<ReturnOrder> getOrder(Integer buyerId, Integer sellerId, LocalDateTime begin, LocalDateTime end);
+     List<ReturnOrder> getOrder(String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end);
      @Select("select user_id from xiafish.user where user_name=#{userName}")
      Integer getUserIdByUserName(String userName);
 
