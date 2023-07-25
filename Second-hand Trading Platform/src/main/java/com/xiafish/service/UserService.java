@@ -24,4 +24,6 @@ public interface UserService {
 
     void updateUserGoods(Goods goods);
 
+    void updateOrder(Order order);
+
 }

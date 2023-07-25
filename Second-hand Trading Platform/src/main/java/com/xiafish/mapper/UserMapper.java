@@ -36,5 +36,6 @@ public interface UserMapper {
     void updateHeadImg(Integer userId, String url);
 
     void updateGoods(Goods goods);
-
+    @Update("update xiafish.`order` set `order`.order_status = #{orderStatus} where buyer_id = #{buyerId} and order_id=#{orderId}")
+    void updateOrder(Order order);
 }

@@ -26,5 +26,5 @@ public class ShoppingCart {
     private LocalDateTime releaseTime;
 
     private String  goodsProfile;
-    private List<String> goodsPhoto;
+    private String goodsPhotos;
 }

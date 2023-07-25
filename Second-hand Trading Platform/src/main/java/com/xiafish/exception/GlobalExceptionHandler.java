@@ -67,9 +67,11 @@ public class GlobalExceptionHandler {
             return Result.error("数据库语法错误（后端马上改！！！）");
         } else if (message.contains("Access denied for user")) {
             return Result.error("数据库登录失败(用户或密码错误)");
-        } else if (message.contains("a foreign key constraint fails")) {
-            return Result.error("插入数据存在外键问题");
-        } else if (message.contains("goods_inventory_constraint")) {
+        }
+        if (message.contains("a foreign key constraint fails")) {
+            return Result.error("数据存在外键问题");
+        }
+        if (message.contains("goods_inventory_constraint")) {
             return Result.error("商品库存不足");
         }
         return Result.error(cause.getMessage());

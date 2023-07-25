@@ -6,10 +6,10 @@
     <update id="updateUser" parameterType="com.xiafish.pojo.User">
         UPDATE xiafish.user
         <set>
-            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
             <if test="userName != null and userName != ''">user_name = #{userName},</if>
             <if test="userNickname != null and userNickname != ''">user_nickname = #{userNickname},</if>
-            <if test="userGender != null and userGender != ''">user_gender = #{userGender},</if>
+            <if test="userGender != null ">user_gender = #{userGender},</if>
             <if test="userPhoneNum != null and userPhoneNum != ''">user_phone_num = #{userPhoneNum},</if>
             <if test="userEmail != null and userEmail != ''">user_email = #{userEmail},</if>
             <if test="userProfile != null and userProfile != ''">user_profile = #{userProfile},</if>
@@ -24,24 +24,24 @@
         INSERT INTO xiafish.goods
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="goodsName != null and goodsName != ''">goods_name,</if>
-            <if test="oriPrice != null and oriPrice != ''">ori_price,</if>
-            <if test="curPrice != null and curPrice != ''">cur_price,</if>
+            <if test="oriPrice != null ">ori_price,</if>
+            <if test="curPrice != null ">cur_price,</if>
             <if test="goodsCategoryName != null and goodsCategoryName != ''">goods_category_name,</if>
-            <if test="sellerId != null and sellerId != ''">seller_id,</if>
-            <if test="releaseTime != null">release_time,</if>
-            <if test="inventory != null and inventory != ''">inventory,</if>
+            <if test="sellerId != null ">seller_id,</if>
+            <if test="releaseTime != null ">release_time,</if>
+            <if test="inventory != null ">inventory,</if>
             <if test="goodsProfile != null and goodsProfile != ''">goods_profile,</if>
             <if test="goodsPhotos!=null and goodsPhotos != ''"> goods_photos</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="goodsName != null and goodsName != ''">#{goodsName},</if>
-            <if test="oriPrice != null and oriPrice != ''">#{oriPrice},</if>
-            <if test="curPrice != null and curPrice != ''">#{curPrice},</if>
+            <if test="oriPrice != null ">#{oriPrice},</if>
+            <if test="curPrice != null ">#{curPrice},</if>
             <if test="goodsCategoryName != null and goodsCategoryName != ''">#{goodsCategoryName},</if>
-            <if test="sellerId != null and sellerId != ''">#{sellerId},</if>
-            <if test="releaseTime != null">#{releaseTime},</if>
-            <if test="inventory != null and inventory != ''">#{inventory},</if>
+            <if test="sellerId != null ">#{sellerId},</if>
+            <if test="releaseTime != null ">#{releaseTime},</if>
+            <if test="inventory != null ">#{inventory},</if>
             <if test="goodsProfile != null and goodsProfile != ''">#{goodsProfile},</if>
             <if test="goodsPhotos!=null and goodsPhotos != ''"> #{goodsPhotos}</if>
         </trim>
@@ -60,14 +60,14 @@
     <update id="updateGoods" parameterType="com.xiafish.pojo.Goods">
         UPDATE xiafish.goods
         <set>
-            <if test="goodsId != null and goodsId != ''">goods_id = #{goodsId},</if>
+            <if test="goodsId != null">goods_id = #{goodsId},</if>
             <if test="goodsName != null and goodsName != ''">goods_name=#{goodsName},</if>
-            <if test="oriPrice != null and oriPrice != ''">ori_price=#{oriPrice},</if>
-            <if test="curPrice != null and curPrice != ''">cur_price=#{curPrice},</if>
+            <if test="oriPrice != null ">ori_price=#{oriPrice},</if>
+            <if test="curPrice != null ">cur_price=#{curPrice},</if>
             <if test="goodsCategoryName != null and goodsCategoryName != ''">goods_category_Name=#{goodsCategoryName},</if>
-            <if test="sellerId != null and sellerId != ''">seller_id=#{sellerId},</if>
-            <if test="releaseTime != null and releaseTime != ''">release_time=#{releaseTime},</if>
-            <if test="inventory != null and inventory != ''">inventory=#{inventory},</if>
+            <if test="sellerId != null ">seller_id=#{sellerId},</if>
+            <if test="releaseTime != null">release_time=#{releaseTime},</if>
+            <if test="inventory != null ">inventory=#{inventory},</if>
             <if test="goodsProfile != null and goodsProfile != ''">goods_profile=#{goodsProfile},</if>
             <if test="goodsPhotos!=null and goodsPhotos != ''"> goods_photos=#{goodsPhotos}</if>
         </set>
@@ -83,5 +83,6 @@
         <where>
             o.seller_id = #{userid} or o.buyer_id = #{userid}
         </where>
+        order by o.order_date_time desc
     </select>
 </mapper>

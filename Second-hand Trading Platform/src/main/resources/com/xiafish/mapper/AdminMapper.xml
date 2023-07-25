@@ -8,13 +8,13 @@
         select *
         from xiafish.user
         <where>
-            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
             <if test="userName != null and userName != ''">and user_name like concat('%',#{userName},'%') </if>
-            <if test="userGender != null and userGender != ''">and user_gender = #{userGender} </if>
+            <if test="userGender != null ">and user_gender = #{userGender} </if>
             <if test="userPhoneNum != null and userPhoneNum != ''">and user_phone_num like concat('%',#{userPhoneNum},'%') </if>
             <if test="userEmail != null and userEmail != ''">and user_email like concat('%',#{userEmail},'%') </if>
             <if test="userPasswd != null and userPasswd != ''">and user_passwd = #{userPasswd} </if>
-            <if test="userStatus != null and userStatus != ''">and user_status = #{userStatus} </if>
+            <if test="userStatus != null ">and user_status = #{userStatus} </if>
             <if test="userPhoto != null and userPhoto != ''">and user_photo = #{userPhoto} </if>
             <if test="userCampus != null and userCampus != ''">and user_campus like concat('%',#{userCampus},'%') </if>
             <if test="userNickname != null and userNickname != ''">and user_nickname like concat('%',#{userNickname},'%') </if>
@@ -37,11 +37,11 @@
         INSERT INTO user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userName != null and userName != ''">user_name,</if>
-            <if test="userGender != null and userGender != ''">user_gender,</if>
+            <if test="userGender != null ">user_gender,</if>
             <if test="userPhoneNum != null and userPhoneNum != ''">user_phone_num,</if>
             <if test="userEmail != null and userEmail != ''">user_email,</if>
             <if test="userPasswd != null and userPasswd != ''">user_passwd,</if>
-            <if test="userStatus != null and userStatus != ''">user_status,</if>
+            <if test="userStatus != null">user_status,</if>
             <if test="userPhoto != null and userPhoto != ''">user_photo,</if>
             <if test="userCampus != null and userCampus != ''">user_campus,</if>
             <if test="userNickname != null and userNickname != ''">user_nickname,</if>
@@ -50,11 +50,11 @@
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userName != null and userName != ''">#{userName},</if>
-            <if test="userGender != null and userGender != ''">#{userGender},</if>
+            <if test="userGender != null ">#{userGender},</if>
             <if test="userPhoneNum != null and userPhoneNum != ''">#{userPhoneNum},</if>
             <if test="userEmail != null and userEmail != ''">#{userEmail},</if>
             <if test="userPasswd != null and userPasswd != ''">#{userPasswd},</if>
-            <if test="userStatus != null and userStatus != ''">#{userStatus},</if>
+            <if test="userStatus != null ">#{userStatus},</if>
             <if test="userPhoto != null and userPhoto != ''">#{userPhoto},</if>
             <if test="userCampus != null and userCampus != ''">#{userCampus},</if>
             <if test="userNickname != null and userNickname != ''">#{userNickname},</if>
@@ -64,13 +64,13 @@
     <update id="updateUser" parameterType="com.xiafish.pojo.User">
         UPDATE user
         <set>
-            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="userId != null ">user_id = #{userId},</if>
             <if test="userName != null and userName != ''">user_name = #{userName},</if>
-            <if test="userGender != null and userGender != ''">user_gender = #{userGender},</if>
+            <if test="userGender != null ">user_gender = #{userGender},</if>
             <if test="userPhoneNum != null and userPhoneNum != ''">user_phone_num = #{userPhoneNum},</if>
             <if test="userEmail != null and userEmail != ''">user_email = #{userEmail},</if>
             <if test="userPasswd != null and userPasswd != ''">user_passwd=#{userPasswd},</if>
-            <if test="userStatus != null and userStatus != ''">user_status=#{userStatus},</if>
+            <if test="userStatus != null ">user_status=#{userStatus},</if>
             <if test="userPhoto != null and userPhoto != ''">user_photo = #{userPhoto},</if>
             <if test="userCampus != null and userCampus != ''">user_campus = #{userCampus},</if>
             <if test="userNickname != null and userNickname != ''">user_nickname = #{userNickname},</if>
@@ -85,8 +85,8 @@
         left join xiafish.user seller on o.seller_id = seller.user_id
         left join xiafish.goods on o.goods_id = goods.goods_id
         <where>
-            <if test="buyerId != null ">buyer_id = #{buyerId}</if>
-            <if test="sellerId != null">and seller_id = #{sellerId}</if>
+            <if test="buyerName != null and buyerName != '' ">buyer.user_name like concat('%',#{buyerName},'%') </if>
+            <if test="sellerName != null and sellerName !='' ">and seller.user_name like concat('%',#{sellerName},'%')</if>
             <if test="begin != null">and order_date_time &gt;= #{begin}</if>
             <if test="end != null">and order_date_time &lt;= #{end}</if>
         </where>
