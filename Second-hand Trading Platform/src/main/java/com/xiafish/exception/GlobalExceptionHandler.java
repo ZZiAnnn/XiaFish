@@ -71,7 +71,7 @@ public class GlobalExceptionHandler {
             return Result.error("数据库登录失败(用户或密码错误)");
         }
         if (message.contains("a foreign key constraint fails")) {
-            return Result.error("插入数据存在外键问题");
+            return Result.error("数据存在外键问题");
         }
         if (message.contains("goods_inventory_constraint")) {
             return Result.error("商品库存不足");
