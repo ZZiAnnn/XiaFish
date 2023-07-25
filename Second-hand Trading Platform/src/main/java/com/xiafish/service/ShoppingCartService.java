@@ -7,7 +7,7 @@ import com.xiafish.pojo.ShoppingCart;
 import java.util.List;
 
 public interface ShoppingCartService {
-    void addToCart(Integer userId, Integer goodsId, Integer collectNum);
+    void addToCart(Integer userId, Integer goodsId, Integer collectNum) throws Exception;
 
     List<ShoppingCart> getCart(Integer userId);
 
