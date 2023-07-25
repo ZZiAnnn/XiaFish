@@ -83,8 +83,8 @@
         left join xiafish.user seller on o.seller_id = seller.user_id
         left join xiafish.goods on o.goods_id = goods.goods_id
         <where>
-            <if test="buyerId != null ">buyer_id = #{buyerId}</if>
-            <if test="sellerId != null">and seller_id = #{sellerId}</if>
+            <if test="buyerName != null and buyerName != '' ">buyer.user_name like concat('%',#{buyerName},'%') </if>
+            <if test="sellerName != null and sellerName !='' ">and seller.user_name like concat('%',#{sellerName},'%')</if>
             <if test="begin != null">and order_date_time &gt;= #{begin}</if>
             <if test="end != null">and order_date_time &lt;= #{end}</if>
         </where>

@@ -52,15 +52,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public PageBean getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end) {
 
-        // 获取用户ID
-        Integer buyerId = adminMapper.getUserIdByUserName(buyerName);
-        Integer sellerId = adminMapper.getUserIdByUserName(sellerName);
 
         // 设置分页参数
         PageHelper.startPage(page,pageSize);
 
         // 执行条件分页查询
-        List<ReturnOrder> orderList = adminMapper.getOrder(buyerId,sellerId,begin,end);
+        List<ReturnOrder> orderList = adminMapper.getOrder(buyerName,sellerName,begin,end);
 
         // PageHelper返回的orderList实际上是Page类型
         Page<ReturnOrder> p = (Page<ReturnOrder>) orderList;
