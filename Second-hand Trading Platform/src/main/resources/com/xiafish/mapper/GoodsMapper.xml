@@ -25,6 +25,6 @@
             <if test="highPrice != null ">and cur_price = #{highPrice}</if>
             <if test="campus != null and campus != ''">and user.user_campus like #{campus}</if>
         </where>
-        order by release_time
+        order by release_time desc
     </select>
 </mapper>
