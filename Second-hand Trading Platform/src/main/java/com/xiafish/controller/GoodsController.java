@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 @Slf4j
@@ -37,8 +38,14 @@ public class GoodsController {
     public Result purchaseById(@RequestAttribute("userId") Integer userId,
                                @RequestParam("goodsId") Integer goodsId,
                                @RequestParam(value = "orderNum", defaultValue = "1") Integer orderNum) {
-        log.info("用户 {} 直接购买商品 {}，数量为 {}", userId, goodsId, orderNum);
-        goodsService.purchaseById(userId, goodsId, orderNum);
+        try {
+            log.info("用户 {} 直接购买商品 {}，数量为 {}", userId, goodsId, orderNum);
+            goodsService.purchaseById(userId, goodsId, orderNum);
+        }
+        catch (Exception e)
+        {
+            return Result.error(e.getMessage());
+        }
         return Result.success();
     }
 

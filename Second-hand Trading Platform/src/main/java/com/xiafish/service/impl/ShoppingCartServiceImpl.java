@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -25,7 +27,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private OrderMapper orderMapper;
 
     @Override
-    public void addToCart(Integer userId, Integer goodsId, Integer collectNum) {
+    public void addToCart(Integer userId, Integer goodsId, Integer collectNum) throws Exception {
+        Goods goods=goodsMapper.getById(goodsId);
+        if(Objects.equals(goods.getSellerId(), userId))
+        {
+            throw new Exception("用户不能将自己发布的商品加入购物车");
+        }
         shoppingCartMapper.insertToCart(userId, goodsId, collectNum, LocalDateTime.now());
     }
 
@@ -51,6 +58,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             Goods goods = goodsMapper.getById(shoppingCart.getGoodsId());
             if (goods == null) {
                 throw new Exception("对应的商品不存在");
+            }
+            if(Objects.equals(shoppingCart.getUserId(), goods.getSellerId()))
+            {
+                throw new Exception("用户不能购买自己发布的商品");
             }
             Order order = new Order(null, shoppingCart.getUserId(), goods.getSellerId(), shoppingCart.getGoodsId(), shoppingCart.getCollectNum(), goods.getCurPrice() * shoppingCart.getCollectNum(), "已下单", LocalDateTime.now());
             goodsMapper.reduceInventory(shoppingCart.getGoodsId(), shoppingCart.getCollectNum());
