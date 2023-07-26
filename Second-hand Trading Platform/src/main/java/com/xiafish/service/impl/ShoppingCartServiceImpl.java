@@ -52,6 +52,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void buyFromShoppingCart(Integer userId, List<Integer> shoppingCartIds) throws Exception {
         for (Integer shoppingCartId : shoppingCartIds) {
             ShoppingCart shoppingCart = shoppingCartMapper.getShoppingCartById(shoppingCartId);
+            shoppingCartMapper.deleteShoppingCart(shoppingCart);
             if (shoppingCart == null) {
                 throw new Exception("对应的购物车Id不存在");
             }

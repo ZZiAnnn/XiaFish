@@ -43,7 +43,8 @@ public class AdminController {
         {
             // 使用BCryptPasswordEncoder进行密码加密
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setUserPasswd(encoder.encode(password));}
+            user.setUserPasswd(encoder.encode(password));
+        }
         if((user.getUserEmail()!=null)&&!(ValidationUtils.isValidEmail(user.getUserEmail())))
             return Result.error("Invalid email format");
         if ((user.getUserPhoneNum() != null) && !(ValidationUtils.isValidPhoneNumber(user.getUserPhoneNum())))
@@ -70,19 +71,8 @@ public class AdminController {
 
     @PostMapping("admin/orders")
     public Result getOrders(@RequestBody Map<String, Object> orderBody) {
-        Integer page = (Integer) orderBody.get("page");
-        if (page == null) page = 1;
-        Integer pageSize = (Integer) orderBody.get("pageSize");
-        if (pageSize == null) pageSize = 10;
-        String buyerName = (String) orderBody.get("buyerName");
-        String sellerName = (String) orderBody.get("sellerName");
-        String beginStr = (String) orderBody.get("begin");
-        LocalDateTime begin = beginStr != null ? LocalDateTime.parse(beginStr) : null;
-        String endStr = (String) orderBody.get("end");
-        LocalDateTime end = endStr != null ? LocalDateTime.parse(endStr) : null;
 
-        log.info("管理员查看历史订单，卖家{}，买家{}，开始时间{}，结束时间{}", sellerName, buyerName, begin, end);
-        PageBean orderList = adminService.getOrder(page, pageSize, buyerName, sellerName, begin, end);
+        PageBean orderList = adminService.getOrder(orderBody);
         return Result.success(orderList);
     }
 
