@@ -25,11 +25,13 @@ public class SignUpController {
     {
         String username=(String) loginBody.get("username");
         String password=(String) loginBody.get("password");
+        String email =(String) loginBody.get("email");
+        String phone =(String) loginBody.get("phone");
         // 使用BCryptPasswordEncoder进行密码加密
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encryptedPassword = encoder.encode(password);
         
-        signUpService.addUser(username,encryptedPassword);
+        signUpService.addUser(username,encryptedPassword,phone,email);
         Map<String, Object> claims = new HashMap<>();
 
         Integer userId=signUpService.getId();
