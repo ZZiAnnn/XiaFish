@@ -1,9 +1,6 @@
 package com.xiafish.controller;
 
-import com.xiafish.pojo.Goods;
-import com.xiafish.pojo.GoodsComment;
-import com.xiafish.pojo.PageBean;
-import com.xiafish.pojo.Result;
+import com.xiafish.pojo.*;
 import com.xiafish.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -55,5 +53,13 @@ public class GoodsController {
         log.info("发布商品评价 {}", goodsComment.toString());
         goodsService.releaseComment(goodsComment);
         return Result.success();
+    }
+
+    @GetMapping("goods/comment/{goodsId}")
+    public Result getGoodsComment(@PathVariable Integer goodsId)
+    {
+        log.info("查询商品评价 商品号为{}",goodsId);
+        List<GoodsCommentDto> goodsCommentDtoList=goodsService.getGoodsComment(goodsId);
+        return Result.success(goodsCommentDtoList);
     }
 }

@@ -2,6 +2,7 @@ package com.xiafish.service;
 
 import com.xiafish.pojo.Goods;
 import com.xiafish.pojo.GoodsComment;
+import com.xiafish.pojo.GoodsCommentDto;
 import com.xiafish.pojo.PageBean;
 import org.springframework.security.core.parameters.P;
 
@@ -21,4 +22,5 @@ public interface GoodsService {
 
     void uploadImgs(Integer goodsId, List<String> urls);
 
+    List<GoodsCommentDto> getGoodsComment(Integer goodsId);
 }
