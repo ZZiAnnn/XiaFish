@@ -17,7 +17,8 @@
         LEFT JOIN xiafish.user
         ON goods.seller_id = user.user_id
         <where>
-            <if test="goodsName != null and goodsName != ''">goods_name like concat('%',#{goodsName},'%')</if>
+            goods.inventory > 0
+            <if test="goodsName != null and goodsName != ''">and goods_name like concat('%',#{goodsName},'%')</if>
             <if test="goodsCategoryName != null and goodsCategoryName != ''">and goods_category_name = #{goodsCategoryName}</if>
             <if test="begin != null ">and release_time = #{begin}</if>
             <if test="end != null ">and release_time = #{end}</if>
