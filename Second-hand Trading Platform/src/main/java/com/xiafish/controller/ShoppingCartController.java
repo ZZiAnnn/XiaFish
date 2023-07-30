@@ -54,7 +54,7 @@ public class ShoppingCartController {
         try {
             shoppingCartService.buyFromShoppingCart(userId, shoppingCartIds);
         }catch (Exception ex){
-            Result.error(ex.getMessage());
+            return Result.error(ex.getMessage());
         }
         return Result.success();
     }

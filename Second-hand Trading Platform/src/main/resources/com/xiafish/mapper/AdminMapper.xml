@@ -89,6 +89,8 @@
             <if test="sellerName != null and sellerName !='' ">and seller.user_name like concat('%',#{sellerName},'%')</if>
             <if test="begin != null">and order_date_time &gt;= #{begin}</if>
             <if test="end != null">and order_date_time &lt;= #{end}</if>
+            <if test="goodsName != null and goodsName != ''">and goods.goods_name like concat('%',#{goodsName},'%')</if>
+            <if test="orderStatus != null and orderStatus != ''">and o.order_status like #{orderStatus}</if>
         </where>
     </select>
 </mapper>

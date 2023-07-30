@@ -5,6 +5,7 @@ import com.xiafish.pojo.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface AdminService {
     /**
@@ -22,6 +23,6 @@ public interface AdminService {
 
     void updateUser(User user);
 
-    PageBean getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end);
+    PageBean getOrder(Map<String,Object> orderBody);
 
 }

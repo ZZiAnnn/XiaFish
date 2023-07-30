@@ -10,8 +10,8 @@ public class SignUpServiceImpl implements SignUpService {
     @Autowired
     private SignUpMapper signUpMapper;
     @Override
-    public void addUser(String username, String password){
-            signUpMapper.addUser(username, password);
+    public void addUser(String username, String password,String phone,String email){
+            signUpMapper.addUser(username, password,phone,email);
     }
 
     @Override

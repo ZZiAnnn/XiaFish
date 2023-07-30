@@ -7,12 +7,15 @@ import com.xiafish.pojo.PageBean;
 import com.xiafish.DTO.OrderDTO;
 import com.xiafish.pojo.User;
 import com.xiafish.service.AdminService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -48,8 +51,21 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public PageBean getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end) {
+    public PageBean getOrder(Map<String,Object> orderBody) {
 
+        Integer page = (Integer) orderBody.get("page");
+        if (page == null) page = 1;
+        Integer pageSize = (Integer) orderBody.get("pageSize");
+        if (pageSize == null) pageSize = 10;
+        String buyerName = (String) orderBody.get("buyerName");
+        String sellerName = (String) orderBody.get("sellerName");
+        String orderStatus =(String) orderBody.get("orderStatus");
+        String goodsName = (String) orderBody.get("goodsName");
+        String beginStr = (String) orderBody.get("begin");
+        LocalDateTime begin = beginStr != null ? LocalDateTime.parse(beginStr) : null;
+        String endStr = (String) orderBody.get("end");
+        LocalDateTime end = endStr != null ? LocalDateTime.parse(endStr) : null;
+        log.info("管理员查看历史订单，卖家{}，买家{}，开始时间{}，结束时间{},商品名称{}，订单状态{}", sellerName, buyerName, begin, end,goodsName,orderStatus);
 
         // 设置分页参数
         PageHelper.startPage(page, pageSize);

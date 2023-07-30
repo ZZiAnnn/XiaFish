@@ -3,14 +3,13 @@ package com.xiafish.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xiafish.mapper.GoodsMapper;
-import com.xiafish.pojo.Goods;
-import com.xiafish.pojo.GoodsComment;
-import com.xiafish.pojo.PageBean;
+import com.xiafish.pojo.*;
 import com.xiafish.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -61,11 +60,14 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     @Transactional(rollbackFor=Exception.class)//事务管理（操作失败时回滚）
-    public void purchaseById(Integer userId, Integer goodsId, Integer orderNum) {
+    public void purchaseById(Integer userId, Integer goodsId, Integer orderNum) throws Exception {
         Integer sellerId=goodsMapper.getSellerId(goodsId);
         Float goodsPrice=goodsMapper.getGoodsPrice(goodsId);
         String orderStatus="已下单";
-
+        if(userId.equals(sellerId))
+        {
+            throw new Exception("用户不能购买自己发布的商品");
+        }
         goodsMapper.reduceInventory(goodsId,orderNum);
         goodsMapper.purchaseById(userId,sellerId,goodsId,orderNum,
                 orderNum*goodsPrice,orderStatus,LocalDateTime.now());
@@ -79,6 +81,11 @@ public class GoodsServiceImpl implements GoodsService {
     public void uploadImgs(Integer goodsId, List<String> urls) {
         goodsMapper.insertImages(goodsId,urls);
 
+    }
+
+    @Override
+    public List<GoodsCommentDto> getGoodsComment(Integer goodsId) {
+        return goodsMapper.getGoodsComment(goodsId);
     }
 
 }
