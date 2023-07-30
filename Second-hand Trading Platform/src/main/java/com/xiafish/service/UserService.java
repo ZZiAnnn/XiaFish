@@ -1,5 +1,6 @@
 package com.xiafish.service;
 
+import com.xiafish.DTO.OrderDTO;
 import com.xiafish.pojo.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface UserService {
 
     List<ShoppingCart> viewShoppingCart(Integer userid);
 
-    List<ReturnOrder> findOrder(Integer userid);
+    List<OrderDTO> findOrder(Integer userid);
     void updateHeadImg(Integer userId, String url);
 
     void updateUserGoods(Goods goods);

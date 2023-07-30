@@ -74,7 +74,7 @@
         WHERE goods_id=#{goodsId}
     </update>
 
-    <select id="selectOrder" resultType="com.xiafish.pojo.ReturnOrder">
+    <select id="selectOrder" resultType="com.xiafish.DTO.OrderDTO">
         select o.*, buyer.user_name as buyerName, seller.user_name as sellerName, goods.goods_name, goods.goods_photos
         from xiafish.`order` o
         left join xiafish.user buyer on o.buyer_id = buyer.user_id

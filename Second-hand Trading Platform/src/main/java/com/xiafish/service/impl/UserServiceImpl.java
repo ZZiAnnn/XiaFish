@@ -1,6 +1,6 @@
 package com.xiafish.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import com.xiafish.DTO.OrderDTO;
 import com.xiafish.mapper.GoodsMapper;
 import com.xiafish.mapper.UserMapper;
 import com.xiafish.pojo.*;
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ReturnOrder> findOrder(Integer userid) {
+    public List<OrderDTO> findOrder(Integer userid) {
         return userMapper.selectOrder(userid);
     }
 

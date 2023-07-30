@@ -1,20 +1,14 @@
 package com.xiafish.controller;
 
+import com.xiafish.DTO.OrderDTO;
 import com.xiafish.pojo.*;
 import com.xiafish.service.UserService;
-import com.xiafish.util.JwtUtils;
-import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -74,7 +68,7 @@ public class UserController {
     //查询用户的订单
     @GetMapping("user/order")
     public Result findOrder(@RequestAttribute("userId") Integer userId) {
-        List<ReturnOrder> userOrdersList = userService.findOrder(userId);
+        List<OrderDTO> userOrdersList = userService.findOrder(userId);
         return Result.success(userOrdersList);
     }
 

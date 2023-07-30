@@ -1,5 +1,6 @@
 package com.xiafish.mapper;
 
+import com.xiafish.DTO.OrderDTO;
 import com.xiafish.pojo.*;
 import org.apache.ibatis.annotations.*;
 
@@ -30,7 +31,7 @@ public interface UserMapper {
     List<ShoppingCart> selectShoppingCart(Integer userid);
 
 
-    List<ReturnOrder> selectOrder(Integer userid);
+    List<OrderDTO> selectOrder(Integer userid);
 
     @Update("update xiafish.user set user_photo=#{url} where user_id=#{userId}")
     void updateHeadImg(Integer userId, String url);

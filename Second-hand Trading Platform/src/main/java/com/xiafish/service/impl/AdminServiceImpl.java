@@ -3,15 +3,13 @@ package com.xiafish.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xiafish.mapper.AdminMapper;
-import com.xiafish.pojo.Order;
 import com.xiafish.pojo.PageBean;
-import com.xiafish.pojo.ReturnOrder;
+import com.xiafish.DTO.OrderDTO;
 import com.xiafish.pojo.User;
 import com.xiafish.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -57,10 +55,10 @@ public class AdminServiceImpl implements AdminService {
         PageHelper.startPage(page, pageSize);
 
         // 执行条件分页查询
-        List<ReturnOrder> orderList = adminMapper.getOrder(buyerName,sellerName,begin,end);
+        List<OrderDTO> orderList = adminMapper.getOrder(buyerName,sellerName,begin,end);
 
         // PageHelper返回的orderList实际上是Page类型
-        Page<ReturnOrder> p = (Page<ReturnOrder>) orderList;
+        Page<OrderDTO> p = (Page<OrderDTO>) orderList;
 
         // 封装PageBean
 
