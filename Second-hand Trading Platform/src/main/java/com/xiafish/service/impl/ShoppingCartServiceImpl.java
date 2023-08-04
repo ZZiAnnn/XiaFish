@@ -33,7 +33,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         {
             throw new Exception("用户不能将自己发布的商品加入购物车");
         }
-        shoppingCartMapper.insertToCart(userId, goodsId, collectNum, LocalDateTime.now());
+        try {
+            shoppingCartMapper.insertToCart(userId, goodsId, collectNum, LocalDateTime.now());
+        }catch (Exception e)
+        {
+            throw new Exception("该商品已加入购物车");
+        }
     }
 
     @Override

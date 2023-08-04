@@ -27,7 +27,7 @@ public class ShoppingCartController {
             shoppingCartService.addToCart(userId, goodsId, collectNum);
             return Result.success();
         } catch (Exception e) {
-            return Result.error("该商品已加入购物车");
+            return Result.error(e.getMessage());
         }
     }
 
