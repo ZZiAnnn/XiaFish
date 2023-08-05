@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/xiafish
+    url: jdbc:mysql://118.178.197.206:3306/xiafish
     username: root
-    password: 123456
+    password: 12345
 
   servlet:
     multipart:
@@ -16,13 +16,14 @@ spring:
     password: ruauhiuyxvusdhjf
     default-encoding: utf-8
   redis:
-    host: localhost
+    host: 118.178.197.206
     port: 6379
     database: 0
+    password: 12345
 
 mybatis:
     configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
       map-underscore-to-camel-case: true
-
-
+server:
+  port: 8080
